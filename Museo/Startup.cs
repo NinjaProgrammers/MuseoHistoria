@@ -86,7 +86,6 @@ namespace Museo
 
 
             services.AddScoped<IAreaRepository, AreaRepository>();
-            services.AddScoped<IPositionRepository, PositionRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IActivityRepository, ActivityRepository>();
             services.AddScoped<IAnualPlanRepository, AnualPlanRepository>();
@@ -102,26 +101,10 @@ namespace Museo
             services.AddScoped<IEventOrganizerRepository, EventOrganizerRepository>();
             services.AddScoped<IEORepository, EORepository>();
             services.AddScoped<IPersonalityInEventRepository, PersonalityInEventRepository>();
-            //services.AddScoped<IActivityRepository, ActivityRepository>();
-            //services.AddScoped<IAnualPlanRepository, AnualPlanRepository>();
-            //services.AddScoped<IAreaRepository, AreaRepository>();
-            //services.AddScoped<IBlockRepository, BlockRepository>();
-            //services.AddScoped<IDocumentCategoryRepository, DocumentCategoryRepository>();
-            //services.AddScoped<IDocumentRepository, DocumentRepository>();
-            //services.AddScoped<IEORepository, EORepository>();
-            //services.AddScoped<IEventOrganizerRepository, EventOrganizerRepository>();
-            //services.AddScoped<IEventPersonalityRepository, EventPersonalityRepository>();
-            //services.AddScoped<IEventRepository, EventRepository>();
-            //services.AddScoped<IEventThematicRepository, EventThematicRepository>();
-            //services.AddScoped<IEventTypeRepository, EventTypeRepository>();
-            //services.AddScoped<IIncidenceRepository, IncidenceRepository>();
-            //services.AddScoped<IIncidenceTypeRepository, IncidenceTypeRepository>();
-            //services.AddScoped<INewsRepository, NewsRepository>();
-            //services.AddScoped<IPersonalityInEventRepository, PersonalityInEventRepository>();
-            //services.AddScoped<IPositionRepository, PositionRepository>();
-            //services.AddScoped<IResidentRepository, ResidentRepository>();
-            //services.AddScoped<ITypeActRepository, TypeActRepository>();            
-            //services.AddScoped<IVisitRepository, VisitRepository>();
+            services.AddScoped<IPositionRepository, PositionRepository>();
+            services.AddScoped<IResidentRepository, ResidentRepository>();
+            services.AddScoped<ITypeActRepository, TypeActRepository>();            
+            services.AddScoped<IVisitRepository, VisitRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

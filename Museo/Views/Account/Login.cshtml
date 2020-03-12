@@ -1,33 +1,73 @@
 ﻿@model LoginViewModel
 
-@{ 
+@{
     Layout = null;
 }
 
-<h1>Entrar</h1>
-<div class="row">
-    <div class="col-md-12">
-        <form method="post">
-            <div asp-validation-summary="All" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Username">Nombre de usuario</label>
-                <input asp-for="Username" class="form-control" />
-                <span asp-validation-for="Username" class="text-danger"></span>
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>@ViewBag.Title</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="~/lib/assets/vendor/bootstrap/css/bootstrap.min.css">
+    <link href="~/lib/assets/vendor/fonts/circular-std/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="~/lib/assets/libs/css/style.css">
+    <link rel="stylesheet" href="~/lib/assets/vendor/fonts/fontawesome/css/fontawesome-all.css">
+    <style>
+        html,
+        body {
+            height: 100%;
+        }
+
+        body {
+            display: -ms-flexbox;
+            display: flex;
+            -ms-flex-align: center;
+            align-items: center;
+            padding-top: 40px;
+            padding-bottom: 40px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- ============================================================== -->
+    <!-- login page  -->
+    <!-- ============================================================== -->
+    <div class="splash-container">
+        <div class="card ">
+            <div class="card-header text-center"><img class="logo-img" src="~/lib/assets/images/logo.png" alt="logo"><span class="splash-description">Introduce tu informacion de usuario</span></div>
+            <div class="card-body">
+                <form method="post">
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                    <div class="form-group">
+                        <input asp-for="Username" class="form-control form-control-lg" id="username" type="text" placeholder="Nombre de Usuario" autocomplete="off">
+                        <span asp-validation-for="Username" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input asp-for="Password" class="form-control form-control-lg" id="password" type="password" placeholder="Contraseña" autocomplete="off">
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="RememberMe" class="custom-control custom-checkbox">
+                            <input asp-for="RememberMe" class="custom-control-input" type="checkbox"><span class="custom-control-label">Recuerdame</span>
+                        </label>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-lg btn-block">Entrar</button>
+                </form>
             </div>
-            <div class="form-group">
-                <label asp-for="Password">Contraseña</label>
-                <input asp-for="Password" class="form-control" />
-                <span asp-validation-for="Password" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <div class="checkbox">
-                    <label asp-for="RememberMe">
-                        <input asp-for="RememberMe" />
-                        Recordarme
-                    </label>
-                </div>
-            </div>
-            <button type="submit" class="btn btn-primary">Entrar</button>
-        </form>
+        </div>
     </div>
-</div>
+
+    <!-- ============================================================== -->
+    <!-- end login page  -->
+    <!-- ============================================================== -->
+    <script src="~/lib/assets/vendor/jquery/jquery-3.3.1.min.js"></script>
+    <script src="~/lib/assets/vendor/bootstrap/js/bootstrap.bundle.js"></script>
+</body>
+
+</html>

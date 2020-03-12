@@ -1,0 +1,44 @@
+﻿@{
+    ViewData["Title"] = "Insertar Tipo de Actividad";
+}
+
+
+@section Breadcrumb{
+    <li class="breadcrumb-item"><a asp-controller="TypeAct" asp-action="All" class="breadcrumb-link">Tipos de Actividades</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Insertar</li>
+}
+
+@model TypeAct
+
+
+<div class="row">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        <div class="card">
+            <h2 class="card-header">Inserte un nuevo tipo de actividad</h2>
+            <form method="post" asp-controller="TypeAct" asp-action="Add">
+                <div class="card-body">
+                    <div class="form-group">
+                        <label for="inputText1" class="col-form-label" asp-for="Name">Nombre</label>
+                        <input id="inputText1" type="text" asp-for="Name" class="form-control">
+                        <span asp-validation-for="Name"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputText2" class="col-form-label" asp-for="Description">Descripción</label>
+                        <input id="inputText2" type="text" class="form-control" asp-for="Description" />
+                        <span asp-validation-for="Description"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputText3" class="col-form-label" asp-for="Cost">Costo</label>
+                        <input id="inputText3" type="text" class="form-control text-capitalize" asp-for="Cost" />
+                        <span asp-validation-for="Cost"></span>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 ">
+                        <button class="btn btn-primary" type="submit">Insertar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

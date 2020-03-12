@@ -1,0 +1,39 @@
+﻿@{
+    ViewData["Title"] = "Insertar Residente";
+}
+
+
+@section Breadcrumb{
+    <li class="breadcrumb-item"><a asp-controller="Resident" asp-action="All" class="breadcrumb-link">Residente</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Insertar</li>
+}
+
+@model Resident
+
+
+<div class="row">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        <div class="card">
+            <h2 class="card-header">Insertar</h2>
+            <form method="post" asp-controller="Resident" asp-action="Add">
+                <div class="card-body">
+                    <div class="form-group">
+                        <label for="inputText1" class="col-form-label" asp-for="Identifier">Id</label>
+                        <input id="inputText1" type="text" asp-for="Identifier" class="form-control">
+                        <span asp-validation-for="Identifier"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputText2" class="col-form-label" asp-for="Country">País</label>
+                        <input id="inputText2" type="text" class="form-control text-capitalize" asp-for="Country" />
+                        <span asp-validation-for="Country"></span>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 ">
+                        <button class="btn btn-primary" type="submit">Insertar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

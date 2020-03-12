@@ -14,7 +14,11 @@ namespace Museo.Models
         [MaxLength(50, ErrorMessage = "A lo sumo 50 caracteres permitidos")]
         public string Country { get; set; }
 
-        public List<ResidentVisit> ResidentVisits{ get; set; }
+        [Required]
+        [MaxLength(15, ErrorMessage = "A lo sumo 15 caracteres permitidos")]
+        public string Identifier { get; set; }
+
+        public List<ResidentVisit> ResidentVisits { get; set; }
 
         public bool Active { get; set; }
     }

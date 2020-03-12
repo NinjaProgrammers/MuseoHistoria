@@ -1,30 +1,31 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Adrian\\Documents\\GitHub\\MuseoHistoria\\Museo\\Museo.csproj": {}
+    "C:\\Users\\Claudia's PC\\Documents\\GitHub\\MuseoHistoria\\Museo\\Museo.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Adrian\\Documents\\GitHub\\MuseoHistoria\\Museo\\Museo.csproj": {
+    "C:\\Users\\Claudia's PC\\Documents\\GitHub\\MuseoHistoria\\Museo\\Museo.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Adrian\\Documents\\GitHub\\MuseoHistoria\\Museo\\Museo.csproj",
+        "projectUniqueName": "C:\\Users\\Claudia's PC\\Documents\\GitHub\\MuseoHistoria\\Museo\\Museo.csproj",
         "projectName": "Museo",
-        "projectPath": "C:\\Users\\Adrian\\Documents\\GitHub\\MuseoHistoria\\Museo\\Museo.csproj",
-        "packagesPath": "C:\\Users\\Adrian\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Adrian\\Documents\\GitHub\\MuseoHistoria\\Museo\\obj\\",
+        "projectPath": "C:\\Users\\Claudia's PC\\Documents\\GitHub\\MuseoHistoria\\Museo\\Museo.csproj",
+        "packagesPath": "C:\\Users\\Claudia's PC\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Claudia's PC\\Documents\\GitHub\\MuseoHistoria\\Museo\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Adrian\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Claudia's PC\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages": {},
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Users\\Adrian\\.nuget\\packages": {},
-          "C:\\Users\\Adrian\\Documents\\packages": {}
+          "C:\\Users\\Claudia's PC\\.nuget\\packages": {},
+          "C:\\Users\\Claudia's PC\\Downloads\\Bootstrap Templates\\AdminLTE-3.0.2\\AdminLTE-3.0.2": {},
+          "C:\\packages": {},
+          "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "netcoreapp3.0": {
@@ -57,6 +58,10 @@
               "suppressParent": "All",
               "target": "Package",
               "version": "[3.0.1, )"
+            },
+            "Microsoft.jQuery.Unobtrusive.Ajax": {
+              "target": "Package",
+              "version": "[3.2.6, )"
             }
           },
           "imports": [

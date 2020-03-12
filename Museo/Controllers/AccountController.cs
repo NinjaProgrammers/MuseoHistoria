@@ -44,7 +44,7 @@ namespace Museo.Controllers
                     string folder = Path.Combine(hostingEnvironment.WebRootPath, "images");
                     if (!System.IO.File.Exists(folder))
                         Directory.CreateDirectory(folder);
-                    uniqueFileName = Guid.NewGuid().ToString() + "_" + model.Photo.FileName;
+                    uniqueFileName = model.UserName + ".jpg";
                     model.Photo.CopyTo(new FileStream(Path.Combine(folder, uniqueFileName), FileMode.Create));
                 }
                 var user = new User

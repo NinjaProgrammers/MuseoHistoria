@@ -1,5 +1,9 @@
 ﻿@inject SignInManager<User> signInManager;
 
+@{ 
+    string img = @User.Identity.Name + ".jpg";
+}
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,7 +23,7 @@
     <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
     <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
     <link rel="stylesheet" href="~/lib/assets/vendor/bootstrap/css/bootstrap.min.css">
-
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="~/lib/assets/vendor/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="~/lib/assets/vendor/fonts/circular-std/style.css">
@@ -30,7 +34,8 @@
     <link rel="stylesheet" href="~/lib/assets/vendor/fonts/material-design-iconic-font/css/materialdesignicons.min.css">
     <link rel="stylesheet" href="~/lib/assets/vendor/charts/c3charts/c3.css">
     <link rel="stylesheet" href="~/lib/assets/vendor/fonts/flag-icon-css/flag-icon.min.css">
-
+    <script src="~/js/jquery.unobtrusive-ajax.js"></script>
+    <script src="~/js/jquery.unobtrusive-ajax.min.js"></script>
 </head>
 
 
@@ -52,7 +57,7 @@
                 <div class="collapse navbar-collapse " id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto navbar-right-top">
                         <li class="nav-item dropdown nav-user">
-                            <a class="nav-link nav-user-img" href="#" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="~/lib/assets/images/avatar-1.jpg" alt="" class="user-avatar-md rounded-circle"></a>
+                            <a class="nav-link nav-user-img" href="#" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="~/images/@img" alt="" class="user-avatar-md rounded-circle"></a>
                             <div class="dropdown-menu dropdown-menu-right nav-user-dropdown" aria-labelledby="navbarDropdownMenuLink2">
                                 <div class="nav-user-info">
                                     <!--Poner el usuario que este logeado-->
@@ -116,11 +121,33 @@
                                 <a class="nav-link" asp-controller="Incidence" asp-action="All"><i class="fa fa-fw fa-exclamation-triangle"></i>Incidentes</a>
                             </li>
                             <li class="nav-item">
+                                <a class="nav-link" data-toggle="collapse" aria-expanded="false" data-target="#submenu-4" aria-controls="submenu-4"><i class="fas fa-fw fa-boxes"></i>Estadisticas</a>
+                                <div id="submenu-4" class="collapse submenu" style="">
+                                    <ul class="nav flex-column">
+                                        <li class="nav-item">
+                                            <a class="nav-link" asp-controller="AnualPlan" asp-action="All"><i class="fas fa-fw fa-calendar-check"></i>Planes Anuales</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" asp-controller="Area" asp-action="All"><i class="fas fa-fw fa-building"></i>Areas</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" asp-controller="Position" asp-action="All"><i class="fas fa-fw fa-id-card-alt"></i>Cargos</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" asp-controller="TypeAct" asp-action="All"><i class="fas fa-cubes"></i>Tipos de Actividad</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" asp-controller="Resident" asp-action="All"><i class="fas fa-flag"></i>Residentes</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link" asp-controller="Reports" asp-action="AllReports" data-toggle="collapse" aria-expanded="false" data-target="#submenu-1" aria-controls="submenu-1"><i class="fas fa-fw fa-table"></i>Reportes</a>
                                 <div id="submenu-1" class="collapse submenu" style="">
                                     <ul class="nav flex-column">
                                         <li class="nav-item">
-                                            <a class="nav-link" asp-controller="Reports" asp-action="AllReports" data-toggle="collapse" aria-expanded="false" data-target="#submenu-2" aria-controls="submenu-2"><i class="fas fa-fw fa-table"></i>Flujo de Visitantes</a>
+                                            <a class="nav-link" asp-controller="Reports" asp-action="AllReports" data-toggle="collapse" aria-expanded="false" data-target="#submenu-2" aria-controls="submenu-2"><i class="fas fa-fw fa-calculator"></i>Flujo de Visitantes</a>
                                             <div id="submenu-2" class="collapse submenu" style="">
                                                 <ul class="nav flex-column">
                                                     <li class="nav-item">
@@ -186,28 +213,28 @@
 
 
 
-        <!-- JavaScript -->
-        <!-- jquery 3.3.1 -->
-        <script src="~/lib/assets/vendor/jquery/jquery-3.3.1.min.js"></script>
-        <!-- bootstap bundle js -->
-        <script src="~/lib/assets/vendor/bootstrap/js/bootstrap.bundle.js"></script>
-        <!-- slimscroll js -->
-        <script src="~/lib/assets/vendor/slimscroll/jquery.slimscroll.js"></script>
-        <!-- main js -->
-        <script src="~/lib/assets/libs/js/main-js.js"></script>
-        <!-- chart chartist js -->
-        <script src="~/lib/assets/vendor/charts/chartist-bundle/chartist.min.js"></script>
-        <!-- sparkline js -->
-        <script src="~/lib/assets/vendor/charts/sparkline/jquery.sparkline.js"></script>
-        <!-- morris js -->
-        <script src="~/lib/assets/vendor/charts/morris-bundle/raphael.min.js"></script>
-        <script src="~/lib/assets/vendor/charts/morris-bundle/morris.js"></script>
-        <!-- chart c3 js -->
-        <script src="~/lib/assets/vendor/charts/c3charts/c3.min.js"></script>
-        <script src="~/lib/assets/vendor/charts/c3charts/d3-5.4.0.min.js"></script>
-        <script src="~/lib/assets/vendor/charts/c3charts/C3chartjs.js"></script>
-        <script src="~/lib/assets/libs/js/dashboard-ecommerce.js"></script>
+    <!-- JavaScript -->
+    <!-- jquery 3.3.1 -->
+    <script src="~/lib/assets/vendor/jquery/jquery-3.3.1.min.js"></script>
+    <!-- bootstap bundle js -->
+    <script src="~/lib/assets/vendor/bootstrap/js/bootstrap.bundle.js"></script>
+    <!-- slimscroll js -->
+    <script src="~/lib/assets/vendor/slimscroll/jquery.slimscroll.js"></script>
+    <!-- main js -->
+    <script src="~/lib/assets/libs/js/main-js.js"></script>
+    <!-- chart chartist js -->
+    <script src="~/lib/assets/vendor/charts/chartist-bundle/chartist.min.js"></script>
+    <!-- sparkline js -->
+    <script src="~/lib/assets/vendor/charts/sparkline/jquery.sparkline.js"></script>
+    <!-- morris js -->
+    <script src="~/lib/assets/vendor/charts/morris-bundle/raphael.min.js"></script>
+    <script src="~/lib/assets/vendor/charts/morris-bundle/morris.js"></script>
+    <!-- chart c3 js -->
+    <script src="~/lib/assets/vendor/charts/c3charts/c3.min.js"></script>
+    <script src="~/lib/assets/vendor/charts/c3charts/d3-5.4.0.min.js"></script>
+    <script src="~/lib/assets/vendor/charts/c3charts/C3chartjs.js"></script>
+    <script src="~/lib/assets/libs/js/dashboard-ecommerce.js"></script>
 
-        @RenderSection("Scripts", required: false)
+    @RenderSection("Scripts", required: false)
 </body>
 </html>

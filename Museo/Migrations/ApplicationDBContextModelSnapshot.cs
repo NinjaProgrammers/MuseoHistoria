@@ -690,6 +690,11 @@ namespace Museo.Migrations
                         .HasColumnType("nvarchar(50)")
                         .HasMaxLength(50);
 
+                    b.Property<string>("Identifier")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(15)")
+                        .HasMaxLength(15);
+
                     b.HasKey("Id");
 
                     b.ToTable("Residents");
@@ -720,8 +725,8 @@ namespace Museo.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("Cost")
-                        .HasColumnType("int");
+                    b.Property<float>("Cost")
+                        .HasColumnType("real");
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");

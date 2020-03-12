@@ -1,0 +1,39 @@
+﻿@{
+    ViewData["Title"] = "Editar Área";
+}
+
+
+@section Breadcrumb{
+    <li class="breadcrumb-item"><a asp-controller="Area" asp-action="All" class="breadcrumb-link">Áreas</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Editar</li>
+}
+
+@model Area
+
+
+<div class="row">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        <div class="card">
+            <h2 class="card-header">Editar Área</h2>
+            <form method="post" asp-controller="Area" asp-action="Update">
+                <div class="card-body">
+                    <div class="form-group">
+                        <label for="inputText1" class="col-form-label" asp-for="Name">Nombre</label>
+                        <input id="inputText1" type="text" asp-for="Name" class="form-control">
+                        <span asp-validation-for="Name"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputText2" class="col-form-label" asp-for="Acronym">Siglas</label>
+                        <input id="inputText2" type="text" class="form-control text-capitalize" asp-for="Acronym" />
+                        <span asp-validation-for="Acronym"></span>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 ">
+                        <button class="btn btn-primary" type="submit">Editar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

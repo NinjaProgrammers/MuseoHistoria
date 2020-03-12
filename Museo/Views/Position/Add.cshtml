@@ -1,40 +1,39 @@
-﻿@model Position
-
-
-
-<div class="section container">
-    <div class="col-form-label">
-        <div class="section-title">
-            <h3>Inserte Nueva Posicion</h3>
-        </div>
-        <form enctype="multipart/form-data" asp-controller="Position" asp-action="Add" method="post" class="mt-3">
-            <div class="form-group row rounded">
-                <label asp-for="Name">Nombre</label>
-                <input asp-for="Name" />
-                <span asp-validation-for="Name"></span>
-            </div>
-            <div class="form-group row">
-                <label asp-for="Description">Descripcion</label>
-                <input asp-for="Description" />
-                <span asp-validation-for=Description></span>
-            </div>
-            <div>
-                <button class="badge-pill" type="submit">Crear</button>
-            </div>
-        </form>
-    </div>
-</div>
-
-@{
-    if (ViewBag.Succesfull == "true")
-    {
-        <h3 class="text-success">Posicion insertada correctamente</h3>
-    }
+﻿@{
+    ViewData["Title"] = "Insertar Cargo";
 }
 
 
+@section Breadcrumb{
+    <li class="breadcrumb-item"><a asp-controller="Position" asp-action="All" class="breadcrumb-link">Cargos</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Insertar</li>
+}
+
+@model Position
 
 
-
-
-
+<div class="row">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        <div class="card">
+            <h2 class="card-header">Inserte un nuevo Cargo</h2>
+            <form method="post" asp-controller="Position" asp-action="Add">
+                <div class="card-body">
+                    <div class="form-group">
+                        <label for="inputText1" class="col-form-label" asp-for="Name">Nombre</label>
+                        <input id="inputText1" type="text" asp-for="Name" class="form-control">
+                        <span asp-validation-for="Name"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputText2" class="col-form-label" asp-for="Description">Descripción</label>
+                        <input id="inputText2" type="text" class="form-control " asp-for="Description" />
+                        <span asp-validation-for="Description"></span>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 ">
+                        <button class="btn btn-primary" type="submit">Insertar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
