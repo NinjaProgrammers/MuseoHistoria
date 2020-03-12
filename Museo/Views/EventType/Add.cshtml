@@ -1,0 +1,41 @@
+﻿@{
+    ViewData["Title"] = "Tipo de Evento";
+}
+
+
+@section Breadcrumb{
+    <li class="breadcrumb-item"><a asp-controller="EventType" asp-action="All" class="breadcrumb-link">Tipos de Eventos</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Crear Tipo</li>
+}
+
+@model EventType
+
+<div class="row">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        <div class="card">
+            <h2 class="card-header">Inserte un nuevo tipo de incidencia</h2>
+            <form method="post" asp-controller="EventType" asp-action="Add">
+                <div class="card-body">
+                    <div class="form-group">
+                        <label for="inputText1" class="col-form-label" asp-for="Type">Nombre del Tipo</label>
+                        <input id="inputText1" asp-for="Type" class="form-control">
+                        <span asp-validation-for="Type"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="FormControlTextarea1" asp-for="Description">Descripción</label>
+                        <textarea class="form-control" id="FormControlTextarea1" asp-for="Description" rows="3"></textarea>
+                        <span asp-validation-for="Description"></span>
+                    </div>
+                    <div class="card-footer">
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 ">
+                            <button class="btn btn-primary" type="submit">Insertar</button>
+                            <button class="btn btn-danger" asp-controller="IncidenceType" asp-action="All">Cancelar</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+

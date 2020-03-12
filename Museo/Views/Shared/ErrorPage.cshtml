@@ -1,0 +1,20 @@
+﻿
+@{ 
+    ViewBag.Title = "Not Found";
+}
+
+
+<div class="container">
+    <div class="row">
+        <div class="offset-xl-2 col-xl-8 offset-lg-2 col-lg-8 col-md-12 col-sm-12 col-12">
+            <div class="error-section">
+                <img src="~/lib/assets/images/error-img.png" alt="" class="img-fluid">
+                <div class="error-section-content">
+                    <h1 class="display-3">Oooops<br/> Pagina no encontrada</h1>
+                    <p> @ViewBag.ErrorMessage</p>
+                    <a asp-controller="Home" asp-action="Index" class="btn btn-secondary btn-lg">Regresar al menu</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

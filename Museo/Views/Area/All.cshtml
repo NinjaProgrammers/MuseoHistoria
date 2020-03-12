@@ -1,0 +1,22 @@
+﻿@model IEnumerable<Area>
+
+
+    <div class="table-responsive">
+        <table class="table-bordered">
+            <thead class="table-primary">
+                <tr>
+                    <td>Nombre</td>
+                    <td>Siglas</td>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var area in Model)
+                {
+                    <tr class="d-table-row">
+                        <td class="d-table-cell">@area.Name</td>
+                        <td class="d-table-cell">@area.Acronym</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>

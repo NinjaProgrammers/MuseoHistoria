@@ -1,0 +1,45 @@
+﻿@model List<UserRoleViewModel>
+@using System.Security.Claims;
+
+@{
+    var roleId = ViewBag.roleId;
+}
+
+<form method="post">
+    <div class="card">
+        <div class="card-header">
+            <h2>Añadir o remover usuarios de este rol</h2>
+        </div>
+        <div class="card-body">
+            @for (int i = 0; i < Model.Count; i++)
+            {
+                <div class="form-check m-1">
+                    <input type="hidden" asp-for="@Model[i].UserId" />
+                    <input type="hidden" asp-for="@Model[i].UserName" />
+                    @if (User.Claims.FirstOrDefault(c => c.Type == 
+                        ClaimTypes.NameIdentifier).Value == Model[i].UserId)
+                    {
+
+                        <input asp-for="@Model[i].IsSelected" class="form-check-input" disabled />
+                        <label class="form-check-label" asp-for="@Model[i].IsSelected" disabled>
+                            @Model[i].UserName
+                        </label>
+                    }
+                    else
+                    {
+                        <input asp-for="@Model[i].IsSelected" class="form-check-input" />
+                        <label class="form-check-label" asp-for="@Model[i].IsSelected">
+                            @Model[i].UserName
+                        </label>
+                    }
+
+                </div>
+            }
+        </div>
+        <div class="card-footer">
+            <input type="submit" value="Cambiar" class="btn btn-primary" style="width:auto" />
+            <a asp-action="EditRole" asp-route-id="@roleId"
+               class="btn btn-primary" style="width:auto">Cancelar</a>
+        </div>
+    </div>
+</form>

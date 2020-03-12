@@ -1,0 +1,35 @@
+﻿@{
+    ViewData["Title"] = "Organizador de Evento";
+}
+
+
+@section Breadcrumb{
+    <li class="breadcrumb-item"><a asp-controller="EventOrganizer" asp-action="All" class="breadcrumb-link">Organizador de Eventos</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Editar Organizador</li>
+}
+
+@model EventOrganizer
+<div class="row">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        <div class="card">
+            <h2 class="card-header">Editar Organizador de Evento</h2>
+            <form method="post" asp-controller="EventOrganizer" asp-action="Update">
+                <div class="card-body">
+                    <div class="form-group">
+                        <label for="inputText1" class="col-form-label" asp-for="Name">Nombre</label>
+                        <input id="inputText1" asp-for="Name" class="form-control">
+                        <span asp-validation-for="Name"></span>
+                    </div>
+                    <div class="card-footer">
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 ">
+                            <button class="btn btn-primary" type="submit">Editar</button>
+                            <button class="btn btn-danger" asp-controller="EventOrganizer" asp-action="All">Cancelar</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+

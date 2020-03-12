@@ -1,0 +1,86 @@
+﻿@model RegisterViewModel
+
+@{ 
+    Layout = null;
+}
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Concept - Bootstrap 4 Admin Dashboard Template</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="~/lib/assets/vendor/bootstrap/css/bootstrap.min.css">
+    <link href="~/lib/assets/vendor/fonts/circular-std/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="~/lib/assets/libs/css/style.css">
+    <link rel="stylesheet" href="~/lib/assets/vendor/fonts/fontawesome/css/fontawesome-all.css">
+    <style>
+        html,
+        body {
+            height: 100%;
+        }
+
+        body {
+            display: -ms-flexbox;
+            display: flex;
+            -ms-flex-align: center;
+            align-items: center;
+            padding-top: 40px;
+            padding-bottom: 40px;
+        }
+    </style>
+</head>
+<!-- ============================================================== -->
+<!-- signup form  -->
+<!-- ============================================================== -->
+
+<body>
+    <!-- ============================================================== -->
+    <!-- signup form  -->
+    <!-- ============================================================== -->
+    <form class="splash-container" enctype="multipart/form-data" asp-controller="Login" asp-action="Register" method="post">
+        <div class="card">
+            <div class="card-header">
+                <div class="card-header text-center"><a asp-controller="Home" asp-action="Index"><img class="logo-img" src="~/lib/assets/images/logo.png" alt="logo"></a><span class="splash-description">Introduce tu informacion de usuario</span></div>
+            </div>
+            <div class="card-body">
+                <div class="form-group">
+                    <input asp-for="FullName" class="form-control form-control-lg" type="text" placeholder="Nombre Completo" autocomplete="off">
+                    <span asp-validation-for="FullName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input asp-for="UserName" class="form-control form-control-lg" type="text" placeholder="Nombre de Usuario" autocomplete="off">
+                    <span asp-validation-for="UserName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input asp-for="Email" class="form-control form-control-lg" type="email" name="email" placeholder="Correo" autocomplete="off">
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input asp-for="Password" class="form-control form-control-lg" type="password" placeholder="Contraseña">
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+                <div class="form-group row">
+                    <div class="form-control form-control-lg">
+                        <label asp-for="Photo" class="my-custom-file-label">Foto de Usuario</label>
+                        <input asp-for="Photo" class="form-control my-custom-file-input" />
+                        <!--Hacer el jquery para que se muestre el nombre de la imagen una vez se carga-->
+                    </div>
+                </div>
+                <br />
+                <div class="form-group pt-2">
+                    <button class="btn btn-block btn-primary" type="submit">Registrar</button>
+                </div>
+            </div>
+            <div class="card-footer bg-white">
+                <p>¿Ya tienes cuenta? <a asp-controller="Login" asp-action="Login" class="text-secondary">Entrar</a></p>
+            </div>
+        </div>
+    </form>
+</body>
+
+
+</html>

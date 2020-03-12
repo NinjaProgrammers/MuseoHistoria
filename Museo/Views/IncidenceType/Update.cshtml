@@ -1,0 +1,40 @@
+﻿@{
+    ViewData["Title"] = "Tipo de Incidencia";
+}
+
+
+@section Breadcrumb{
+    <li class="breadcrumb-item"><a asp-controller="IncidenceType" asp-action="All" class="breadcrumb-link">Tipos de Incidencias</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Cambiar Tipo</li>
+}
+
+@model IncidenceType
+
+<div class="row">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        <div class="card">
+            <h2 class="card-header">Cambiar tipo de incidencia</h2>
+            <form method="post" asp-controller="IncidenceType" asp-action="Update">
+                <div class="card-body">
+                    <div class="form-group">
+                        <label for="inputText1" class="col-form-label" asp-for="Type">Nombre del Tipo</label>
+                        <input id="inputText1" asp-for="Type" class="form-control">
+                        <span asp-validation-for="Type"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="FormControlTextarea1" asp-for="Description">Descripcion</label>
+                        <textarea class="form-control" id="FormControlTextarea1" asp-for="Description" rows="3"></textarea>
+                        <span asp-validation-for="Description"></span>
+                    </div>
+                    <div class="card-footer">
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 ">
+                            <button class="btn btn-primary" type="submit">Cambiar</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+

@@ -1,0 +1,51 @@
+﻿
+@{
+    ViewData["Title"] = "Editar Plan Anual";
+}
+
+
+@section Breadcrumb{
+    <li class="breadcrumb-item"><a asp-controller="AnualPlan" asp-action="All" class="breadcrumb-link">Plan Anual</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Editar</li>
+}
+
+@model AnualPlan
+<!-- ============================================================== -->
+<!-- basic form  -->
+<!-- ============================================================== -->
+<div class="row">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        <div class="card">
+            <div class="card-header section-block" id="basicform">
+                <h1 class="section-title">Declarar Plan Anual</h1>
+            </div>
+            <div class="card-body">
+                <form enctype="multipart/form-data" asp-controller="AnualPlan" asp-action="Update" method="post" class="mt-3">
+                    <div class="form-group">
+                        <label asp-for="Month" class="col-form-label">Mes</label>
+                        <input asp-for="Month" type="number" class="form-control">
+                        <span asp-validation-for="Month" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Year">Año</label>
+                        <input asp-for="Year" type="text" class="form-control">
+                        <span asp-validation-for="Year" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Value">Valor</label>
+                        <input asp-for="Value" type="text" class="form-control">
+                        <span asp-validation-for="Value" class="text-danger"></span>
+                    </div>
+                    <div class="card-footer">
+                        <button class="btn btn-primary" type="submit">Cambiar</button>
+                        <a asp-controller="AnualPlan" asp-action="All" class="btn btn-outline-danger">Cancelar</a>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- ============================================================== -->
+<!-- end basic form  -->
+<!-- ============================================================== -->

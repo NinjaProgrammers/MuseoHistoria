@@ -1,0 +1,84 @@
+﻿
+@section Breadcrumb{
+    <li class="breadcrumb-item active">Eventos</li>
+}
+
+@{
+    ViewData["Title"] = "Eventos";
+    int count = 0;
+}
+j;jlhkjh
+@model IEnumerable<EventViewModel>
+
+<div class="card bg-light">
+    <div class="card-header d-flex">
+        <h4 class="mb-0">Eventos</h4>
+        <div class="dropdown ml-auto">
+            <a class="toolbar" role="button" asp-controller="Event" asp-action="Add"> <i class="fa fa-angle-double-right"></i> Insertar</a>
+        </div>
+    </div>
+    <div class="card-body">
+
+        @{
+            foreach (var item in Model)
+            {
+                <div class="col-xl-8 col-lg-12 col-md-12 col-sm-12 col-12 mb-5">
+                    <div class="section-block">
+                        <h3 class="section-title">@item.EventName</h3>
+                    </div>
+                    <div class="tab-regular">
+                        <ul class="nav nav-tabs nav-fill" id="myTab_@count" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="home-tab-justify_@count" data-toggle="tab" href="#home-justify_@count" role="tab" aria-controls="home_@count" aria-selected="true">Descripción</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="profile-tab-justify_@count" data-toggle="tab" href="#profile-justify_@count" role="tab" aria-controls="profile_@count" aria-selected="false">Asistentes</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="contact-tab-justify_@count" data-toggle="tab" href="#contact-justify_@count" role="tab" aria-controls="contact_@count" aria-selected="false">Tema</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content" id="myTabContent_@count">
+                            <div class="tab-pane fade show active" id="home-justify_@count" role="tabpanel" aria-labelledby="home-tab-justify_@count">
+                                <p class="lead">@item.EventDescription</p>
+                                <p>Fecha: @item.Date</p>
+                                <p>Lugar: @item.Place</p>
+                            </div>
+                            <div class="tab-pane fade" id="profile-justify_@count" role="tabpanel" aria-labelledby="profile-tab-justify_@count">
+                                <p><span class="lead">Total de Participantes:</span>  @item.TotalParticipant</p>
+                                <p class="lead">Organizadores:</p>
+                                <ul class="list-unstyled">
+                                    @{
+                                        foreach (var o in item.Organizers)
+                                        {
+                                            <li><span class="badge-dot badge-primary"></span> @o.Name</li>
+                                        }
+                                    }
+                                </ul>
+                                <p class="lead">Personalidades:</p>
+                                <ul class="list-unstyled">
+                                    @{
+                                        foreach (var p in item.Personalities)
+                                        {
+                                            <li><span class="badge-dot badge-primary"></span> @p.Name</li>
+                                        }
+                                    }
+                                </ul>
+                            </div>
+                            <div class="tab-pane fade" id="contact-justify_@count" role="tabpanel" aria-labelledby="contact-tab-justify_@count">
+                                <p class="lead">Tema: @item.EventThmatic.Thematic</p>
+                                <p>@item.EventThmatic.Description</p>
+                                <p class="lead">Tipo: @item.EventType.Type</p>
+                                <p>@item.EventType.Description</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                count = count + 1;
+            }
+        }
+    </div>
+    <div class="card-footer">
+        <a class="btn btn-primary" asp-controller="Event" asp-action="Add"> <i class="fa fa-angle-double-right"></i> Insertar</a>
+    </div>
+</div>

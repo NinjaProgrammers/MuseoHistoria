@@ -1,0 +1,49 @@
+﻿
+@model News
+
+@section Breadcrumb{
+    <li class="breadcrumb-item"><a asp-controller="News" asp-action="All" class="breadcrumb-link">Noticias</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Agregar</li>
+}
+@{ 
+    ViewData["Title"] = "Insertar Noticia";
+}
+
+
+<div class="row">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        <div class="card">
+            <h2 class="card-header">Inserte una nueva Noticia</h2>
+            <form method="post" asp-controller="News" asp-action="Add">
+                <div class="card-body">
+                    <div class="form-group">
+                        <label for="inputText1" class="col-form-label" asp-for="Title">Título</label>
+                        <input id="inputText1" type="text" asp-for="Title" class="form-control">
+                        <span asp-validation-for="Title"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputText2" class="col-form-label" asp-for="Description">Descripción</label>
+                        <input id="inputText2" type="text" class="form-control" asp-for="Description" />
+                        <span asp-validation-for="Description"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputText3" class="col-form-label" asp-for="Author">Autor</label>
+                        <input id="inputText3" type="text" class="form-control" asp-for="Author">
+                        <span asp-validation-for="Author"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputText4" class="col-form-label" asp-for="Link" data-toggle="tooltip" data-placement="right" title="No es necesario un link">Link</label >
+                        <input id="inputText4" type="text" class="form-control" asp-for="Link" >
+                        <span asp-validation-for="Link"></span>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 ">
+                        <button class="btn btn-primary" type="submit">Insertar</button>
+                        <button class="btn btn-danger" asp-controller="News" asp-action="All">Cancelar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

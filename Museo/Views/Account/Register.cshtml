@@ -1,0 +1,45 @@
+﻿@model RegisterViewModel
+
+
+<h1>Registrar nuevo usuario</h1>
+
+<div class="row">
+    <div class="col-md-12">
+        <form method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="UserName">Nombre de usuario</label>
+                <input asp-for="UserName" class="form-control" />
+                <span asp-validation-for="UserName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FullName">Nombre y apellidos</label>
+                <input asp-for="FullName" class="form-control" />
+                <span asp-validation-for="FullName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Password">Contraseña</label>
+                <input asp-for="Password" class="form-control" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ConfirmPassword">Confirmar contraseña</label>
+                <input asp-for="ConfirmPassword" class="form-control" />
+                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email">Correo electrónico</label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <div class="custom-file">
+                    <label asp-for="Photo" class="custom-file-label">Seleccione foto de perfil</label>
+                    <input asp-for="Photo" class="form-control custom-file-input" />
+                </div>
+            </div>
+            @*annadir el area y la posicion*@
+            <button type="submit" class="btn btn-primary">Registrarse</button>
+        </form>
+    </div>
+</div>

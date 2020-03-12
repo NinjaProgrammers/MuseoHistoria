@@ -1,0 +1,33 @@
+﻿@model EditUserViewModel
+
+@{ ViewBag.Title = "Modificar usuario"; }
+
+<h1>Modificar usuario</h1>
+
+<div class="card">
+    <div class="card-header">
+        <h2>Nombre completo: @Model.FullName</h2>
+    </div>
+    <div class="card-body">
+        <h5>Nombre de usuario: @Model.UserName</h5>
+        <h5>Email: @Model.Email</h5>
+        @*annadir la foto, el area y la posicion*@
+    </div>
+    <div class="card-footer">
+        <h2>Roles</h2>
+        @if (Model.Roles.Any())
+        {
+            @foreach (var rol in Model.Roles)
+            {
+                <h5>@rol</h5>
+            }
+        }else
+        {
+            <h5>Este usuario no posee ningún rol</h5>
+        }
+    </div>
+    <a class="btn btn-primary" asp-controller="Administration" asp-action="ManageUserRoles"
+       asp-route-id="@Model.Id">
+        Manejar Roles
+    </a>
+</div>

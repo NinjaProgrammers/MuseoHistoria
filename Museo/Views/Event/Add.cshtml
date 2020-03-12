@@ -1,0 +1,184 @@
+﻿@section Styles{
+    <link href="~/lib/assets/vendor/datepicker/tempusdominus-bootstrap-4.css" rel="stylesheet" />
+    <link href="~/lib/assets/vendor/multi-select/css/multi-select.css" rel="stylesheet" />
+}
+
+@section Breadcrumb{
+    <li class="breadcrumb-item"><a asp-controller="Event" asp-action="All">Eventos</a></li>
+    <li class="breadcrumb-item active">Insertar Evento</li>
+}
+
+@{
+    ViewData["Title"] = "Insertar Evento";
+}
+
+@model AddEventViewModel
+
+<div class="row">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        <div class="card">
+            <h2 class="card-header">Insertar Evento</h2>
+            <form method="post" enctype="multipart/form-data">
+                <div class="card-body">
+                    <div class="form-group">
+                        <label asp-for="EventName">Nombre</label>
+                        <input asp-for="EventName" class="form-control">
+                        <span asp-validation-for="EventName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="FormControlTextarea1" asp-for="EventDescription">Descripción</label>
+                        <textarea class="form-control" id="FormControlTextarea1" asp-for="EventDescription" rows="3"></textarea>
+                        <span asp-validation-for="EventDescription"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="datetimepicker10" class="col-form-label" asp-for="Date">Fecha del Evento</label>
+                        <div class="input-group date" id="datetimepicker10" data-target-input="nearest">
+                            <input class="form-control datetimepicker-input" data-target="#datetimepicker10" asp-for="Date" />
+                            <div class="input-group-append" data-target="#datetimepicker10" data-toggle="datetimepicker">
+                                <div class="input-group-text"><i class="fa fa-calendar-alt"></i></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputText3" class="col-form-label" asp-for="Place">Lugar</label>
+                        <input id="inputText3" type="text" asp-for="Place" class="form-control">
+                        <span asp-validation-for="Place"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputText4" class="col-form-label" asp-for="TotalParticipant">Total de Participantes</label>
+                        <input id="inputText4" type="number" asp-for="TotalParticipant" class="form-control">
+                        <span asp-validation-for="TotalParticipant"></span>
+                    </div>
+                    <div class="form-group">
+                        <div class="card">
+                            <div class="card-header d-flex">
+                                <h4 class="mb-0">Tipo</h4>
+                                <div class="dropdown ml-auto">
+                                    <a class="toolbar" role="button" asp-controller="EventType" asp-action="Add"> <i class="fa fa-angle-double-right"></i> Insertar Tipo</a>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <select class="selectpicker" asp-for="EventTypeId" asp-items="@Model.types">
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="card">
+                            <div class="card-header d-flex">
+                                <h4 class="mb-0">Tema</h4>
+                                <div class="dropdown ml-auto">
+                                    <a class="toolbar" role="button" asp-controller="EventThematic" asp-action="Add"> <i class="fa fa-angle-double-right"></i> Insertar Tema</a>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <select class="selectpicker" asp-for="EventThmaticId" asp-items="@Model.themes">
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                                <div class="card">
+                                    <h5 class="card-header">Personalidades que asistirán</h5>
+                                    <div class="card-body">
+                                        <select multiple="multiple" id="my-select" asp-for="PersonalityIds" asp-items="@Model.personalities">
+                                        </select>
+                                    </div>
+                                    <div class="card-footer">
+                                        <a class="btn btn-outline-primary" asp-controller="EventPersonality" asp-action="Add" asp-route-path="1">Insertar Personalidad</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                                <div class="card">
+                                    <h5 class="card-header">Organizadores</h5>
+                                    <div class="card-body">
+                                        <select multiple="multiple" id="my-select" asp-for="OrganizerIds" asp-items="@Model.organizers">
+                                        </select>
+                                    </div>
+                                    <div class="card-footer">
+                                        <a class="btn btn-outline-primary" asp-controller="EventOrganizer" asp-action="Add" asp-route-path="1">Insertar Organizador</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 ">
+                            <button class="btn btn-primary" type="submit">Insertar</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts{
+    <script src="~/lib/assets/vendor/bootstrap-select/js/bootstrap-select.js"></script>
+    <script src="~/lib/assets/vendor/datepicker/moment.js"></script>
+    <script src="~/lib/assets/vendor/datepicker/datepicker.js"></script>
+    <script src="~/lib/assets/vendor/datepicker/tempusdominus-bootstrap-4.js"></script>
+    <script src="~/lib/assets/vendor/multi-select/js/jquery.multi-select.js"></script>
+    <script>
+        $('#my-select, #pre-selected-options').multiSelect()
+    </script>
+    <script>
+        $('#callbacks').multiSelect({
+            afterSelect: function (values) {
+                alert("Select value: " + values);
+            },
+            afterDeselect: function (values) {
+                alert("Deselect value: " + values);
+            }
+        });
+    </script>
+    <script>
+        $('#keep-order').multiSelect({ keepOrder: true });
+    </script>
+    <script>
+        $('#public-methods').multiSelect();
+        $('#select-all').click(function () {
+            $('#public-methods').multiSelect('select_all');
+            return false;
+        });
+        $('#deselect-all').click(function () {
+            $('#public-methods').multiSelect('deselect_all');
+            return false;
+        });
+        $('#select-100').click(function () {
+            $('#public-methods').multiSelect('select', ['elem_0', 'elem_1'..., 'elem_99']);
+            return false;
+        });
+        $('#deselect-100').click(function () {
+            $('#public-methods').multiSelect('deselect', ['elem_0', 'elem_1'..., 'elem_99']);
+            return false;
+        });
+        $('#refresh').on('click', function () {
+            $('#public-methods').multiSelect('refresh');
+            return false;
+        });
+        $('#add-option').on('click', function () {
+            $('#public-methods').multiSelect('addOption', { value: 42, text: 'test 42', index: 0 });
+            return false;
+        });
+    </script>
+    <script>
+        $('#optgroup').multiSelect({ selectableOptgroup: true });
+    </script>
+    <script>
+        $('#disabled-attribute').multiSelect();
+    </script>
+    <script>
+        $('#custom-headers').multiSelect({
+            selectableHeader: "<div class='custom-header'>Selectable items</div>",
+            selectionHeader: "<div class='custom-header'>Selection items</div>",
+            selectableFooter: "<div class='custom-header'>Selectable footer</div>",
+            selectionFooter: "<div class='custom-header'>Selection footer</div>"
+        });
+    </script>
+}
+

@@ -1,0 +1,213 @@
+﻿@inject SignInManager<User> signInManager;
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>@ViewData["Title"] </title>
+
+    @RenderSection("Styles", required: false)
+
+    <link href="~/lib/assets/css/theme.css" rel="stylesheet" media="all">
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+    <link rel="stylesheet" href="~/lib/assets/vendor/bootstrap/css/bootstrap.min.css">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="~/lib/assets/vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/lib/assets/vendor/fonts/circular-std/style.css">
+    <link rel="stylesheet" href="~/lib/assets/libs/css/style.css">
+    <link rel="stylesheet" href="~/lib/assets/vendor/fonts/fontawesome/css/fontawesome-all.css">
+    <link rel="stylesheet" href="~/lib/assets/vendor/charts/chartist-bundle/chartist.css">
+    <link rel="stylesheet" href="~/lib/assets/vendor/charts/morris-bundle/morris.css">
+    <link rel="stylesheet" href="~/lib/assets/vendor/fonts/material-design-iconic-font/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="~/lib/assets/vendor/charts/c3charts/c3.css">
+    <link rel="stylesheet" href="~/lib/assets/vendor/fonts/flag-icon-css/flag-icon.min.css">
+
+</head>
+
+
+<body>
+
+    <!-- ============================================================== -->
+    <!-- main wrapper -->
+    <!-- ============================================================== -->
+    <div class="dashboard-main-wrapper">
+        <!-- ============================================================== -->
+        <!-- navbar -->
+        <!-- ============================================================== -->
+        <div class="dashboard-header">
+            <nav class="navbar navbar-expand-lg bg-white fixed-top">
+                <a class="navbar-brand" asp-controller="Home" asp-action="Index">Museo</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse " id="navbarSupportedContent">
+                    <ul class="navbar-nav ml-auto navbar-right-top">
+                        <li class="nav-item dropdown nav-user">
+                            <a class="nav-link nav-user-img" href="#" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="~/lib/assets/images/avatar-1.jpg" alt="" class="user-avatar-md rounded-circle"></a>
+                            <div class="dropdown-menu dropdown-menu-right nav-user-dropdown" aria-labelledby="navbarDropdownMenuLink2">
+                                <div class="nav-user-info">
+                                    <!--Poner el usuario que este logeado-->
+                                    <h5 class="mb-0 text-white nav-user-name">@signInManager.Context.User.Identity.Name</h5>
+                                </div>
+                                @if (signInManager.IsSignedIn(User))
+                                {
+                                    @if (User.IsInRole("Admin"))
+                                    {
+                                        <a class="dropdown-item" asp-controller="Administration"
+                                           asp-action="ListRoles">Manejar roles</a>
+                                        <a class="dropdown-item" asp-controller="Administration"
+                                           asp-action="ListUsers">Manejar usuarios</a>
+                                    }
+                                    <a class="dropdown-item" asp-controller="Account" asp-action="Logout">Salir</a>
+                                }
+                                else
+                                {
+                                    <a class="dropdown-item" asp-controller="Account" asp-action="Login">Entrar</a>
+                                }
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+        <!-- ============================================================== -->
+        <!-- end navbar -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- left sidebar -->
+        <!-- ============================================================== -->
+        <div class="nav-left-sidebar sidebar-dark">
+            <div class="menu-list">
+                <nav class="navbar navbar-expand-lg navbar-light">
+                    <a class="d-xl-none d-lg-none" href="#">Dashboard</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav flex-column">
+                            <li class="nav-divider">
+                                Menu
+                            </li>
+                            <li class="nav-item ">
+                                <a class="nav-link active" asp-controller="Users" asp-action="All"><i class="fa fa-fw fa-user-circle"></i>Usuarios</a>
+                            </li>
+                            <li class="nav-item ">
+                                <a class="nav-link" asp-controller="Event" asp-action="All"><i class="fa fa-fw fa-calendar-alt"></i>Eventos</a>
+                            </li>
+                            <li class="nav-item ">
+                                <a class="nav-link" asp-controller="Activity" asp-action="All"><i class="fa fa-fw fa-magic"></i>Actividades</a>
+                            </li>
+                            <li class="nav-item ">
+                                <a class="nav-link" asp-controller="News" asp-action="All"><i class="fa fa-fw fa-newspaper"></i>Noticias</a>
+                            </li>
+                            <li class="nav-item ">
+                                <a class="nav-link" asp-controller="Document" asp-action="All"><i class="fa fa-fw fa-file-alt"></i>Documentos</a>
+                            </li>
+                            <li class="nav-item ">
+                                <a class="nav-link" asp-controller="Incidence" asp-action="All"><i class="fa fa-fw fa-exclamation-triangle"></i>Incidentes</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Reports" asp-action="AllReports" data-toggle="collapse" aria-expanded="false" data-target="#submenu-1" aria-controls="submenu-1"><i class="fas fa-fw fa-table"></i>Reportes</a>
+                                <div id="submenu-1" class="collapse submenu" style="">
+                                    <ul class="nav flex-column">
+                                        <li class="nav-item">
+                                            <a class="nav-link" asp-controller="Reports" asp-action="AllReports" data-toggle="collapse" aria-expanded="false" data-target="#submenu-2" aria-controls="submenu-2"><i class="fas fa-fw fa-table"></i>Flujo de Visitantes</a>
+                                            <div id="submenu-2" class="collapse submenu" style="">
+                                                <ul class="nav flex-column">
+                                                    <li class="nav-item">
+                                                        <a class="nav-link" asp-controller="Reports" asp-action="MonthVisitors"><i class="fas fa-fw fa-table"></i>Por mes</a>
+                                                    </li>
+                                                    <li class="nav-item">
+                                                        <a class="nav-link" asp-controller="Reports" asp-action="TypeVisitors"><i class="fas fa-fw fa-table"></i>Por tipo</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" asp-controller="Reports" asp-action="Earnings"><i class="fas fa-fw fa-hand-holding-usd"></i>Ganancias</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" asp-controller="Reports" asp-action="WorkersActivities"><i class="fas fa-fw fa-table"></i>Trabajadores con mas Actividades</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </div>
+        <!-- ============================================================== -->
+        <!-- end left sidebar -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- main wrapper  -->
+        <!-- ============================================================== -->
+        <div class="dashboard-wrapper">
+            <div class="container-fluid dashboard-content ">
+                <!-- ============================================================== -->
+                <!-- pageheader  -->
+                <!-- ============================================================== -->
+                <div class="row">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                        <div class="page-header">
+                            <h2 class="pageheader-title">@ViewData["Title"] </h2>
+                            <div class="page-breadcrumb">
+                                <nav aria-label="breadcrumb">
+                                    <ol class="breadcrumb">
+                                        @RenderSection("Breadcrumb", false)
+                                    </ol>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- ============================================================== -->
+                <!-- end pageheader  -->
+                <!-- ============================================================== -->
+                @RenderBody()
+            </div>
+        </div>
+        <!-- ============================================================== -->
+        <!-- end main wrapper  -->
+        <!-- ============================================================== -->
+
+    </div>
+
+
+
+
+        <!-- JavaScript -->
+        <!-- jquery 3.3.1 -->
+        <script src="~/lib/assets/vendor/jquery/jquery-3.3.1.min.js"></script>
+        <!-- bootstap bundle js -->
+        <script src="~/lib/assets/vendor/bootstrap/js/bootstrap.bundle.js"></script>
+        <!-- slimscroll js -->
+        <script src="~/lib/assets/vendor/slimscroll/jquery.slimscroll.js"></script>
+        <!-- main js -->
+        <script src="~/lib/assets/libs/js/main-js.js"></script>
+        <!-- chart chartist js -->
+        <script src="~/lib/assets/vendor/charts/chartist-bundle/chartist.min.js"></script>
+        <!-- sparkline js -->
+        <script src="~/lib/assets/vendor/charts/sparkline/jquery.sparkline.js"></script>
+        <!-- morris js -->
+        <script src="~/lib/assets/vendor/charts/morris-bundle/raphael.min.js"></script>
+        <script src="~/lib/assets/vendor/charts/morris-bundle/morris.js"></script>
+        <!-- chart c3 js -->
+        <script src="~/lib/assets/vendor/charts/c3charts/c3.min.js"></script>
+        <script src="~/lib/assets/vendor/charts/c3charts/d3-5.4.0.min.js"></script>
+        <script src="~/lib/assets/vendor/charts/c3charts/C3chartjs.js"></script>
+        <script src="~/lib/assets/libs/js/dashboard-ecommerce.js"></script>
+
+        @RenderSection("Scripts", required: false)
+</body>
+</html>

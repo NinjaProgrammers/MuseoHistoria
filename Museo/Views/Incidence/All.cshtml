@@ -1,0 +1,184 @@
+﻿
+
+@model IncidenceViewModel
+
+@section Breadcrumb{
+    <li class="breadcrumb-item active" aria-current="page">Incidencias</li>
+}
+
+
+<h1>Incidentes</h1>
+
+<div class="card bg-success-light">
+    <div class="card-header d-flex">
+        <h4 class="mb-0">Incidencias</h4>
+        <div class="dropdown ml-auto">
+            <a class="toolbar" style="padding-right:20px;" role="button" asp-controller="Incidence" asp-action="Add"> <i class="fa fa-angle-double-right"></i> Insertar</a>
+            <a class="toolbar" role="button" asp-controller="IncidenceType" asp-action="Add"> <i class="fa fa-angle-right"></i>Insertar Tipo </a>
+        </div>
+    </div>
+    <div class="card-body">
+        @{
+            int count = 0;
+            for (int x = 0; x < Model.incidences.Count;)
+            {
+
+                <div class="row">
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h3 class="card-title border-bottom pb-2">Incidencia en @Model.incidences[x].Item1.Place</h3>
+                                <div>
+                                    <div class="accrodion-regular">
+                                        <div id="accordion">
+                                            <div class="card">
+                                                <div class="card-header" id="heading_@count">
+                                                    <h5 class="mb-0">
+                                                        <button class="btn btn-link" data-toggle="collapse" data-target="#collapse_@count" aria-expanded="true" aria-controls="collapse_@count">Responsable                                     </button>
+                                                    </h5>
+                                                </div>
+                                                <div id="collapse_@count" class="collapse show" aria-labelledby="heading_@count" data-parent="#accordion">
+                                                    <div class="card-body">
+                                                        <p class="lead">@Model.incidences[x].Item1.Responsible</p>
+                                                        <p>Tipo de la Incidencia: @Model.incidences[x].Item2.Type</p>
+                                                        <p>Descripción: @Model.incidences[x].Item2.Description</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            @{
+                                                count = count + 1;
+                                            }
+                                            <div class="card">
+                                                <div class="card-header" id="heading_@count">
+                                                    <h5 class="mb-0">
+                                                        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapse_@count" aria-expanded="false" aria-controls="collapse_@count">
+                                                            Modificación de la incidencia
+                                                        </button>
+                                                    </h5>
+                                                </div>
+                                                <div id="collapse_@count" class="collapse" aria-labelledby="heading_@count" data-parent="#accordion">
+                                                    <div class="card-body">
+                                                        <p>Registrado por: @Model.incidences[x].Item1.RegisteredBy</p>
+                                                        <p>Registrado en: @Model.incidences[x].Item1.RegisterDate</p>
+                                                        <p>Modificado por: @Model.incidences[x].Item1.ModifiedBy</p>
+                                                        <p>Modificado en: @Model.incidences[x].Item1.ModifiedDate</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            @{
+                                                count = count + 1;
+                                            }
+                                            <div class="card">
+                                                <div class="card-header" id="heading_@count">
+                                                    <h5 class="mb-0">
+                                                        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapse_@count" aria-expanded="false" aria-controls="collapse_@count">
+                                                            Más info
+                                                        </button>
+                                                    </h5>
+                                                </div>
+                                                <div id="collapse_@count" class="collapse" aria-labelledby="heading_@count" data-parent="#accordion">
+                                                    <div class="card-body">
+                                                        <p>Categoría: @Model.incidences[x].Item1.Category</p>
+                                                        <p>Estado: @Model.incidences[x].Item1.State</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            @{
+                                                count = count + 1;
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <a style="padding-left:20px;" class="btn btn-danger" asp-controller="Incidence" asp-action="Delete" asp-route-id="@Model.incidences[x].Item1.Id">Eliminar</a>
+                                <a style="padding-left:20px;" class="btn btn-secondary" asp-controller="Incidence" asp-action="Update" asp-route-id="@Model.incidences[x].Item1.Id">Cambiar</a>
+                            </div>
+                        </div>
+                    </div>
+                    @{
+                        x = x + 1;
+                        if (x >= Model.incidences.Count)
+                            break;
+                    }
+                    
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h3 class="card-title border-bottom pb-2">Incidencia en @Model.incidences[x].Item1.Place</h3>
+                                <div>
+                                    <div class="accrodion-regular">
+                                        <div id="accordion">
+                                            <div class="card">
+                                                <div class="card-header" id="heading_@count">
+                                                    <h5 class="mb-0">
+                                                        <button class="btn btn-link" data-toggle="collapse" data-target="#collapse_@count" aria-expanded="true" aria-controls="collapse_@count">Responsable                                     </button>
+                                                    </h5>
+                                                </div>
+                                                <div id="collapse_@count" class="collapse show" aria-labelledby="heading_@count" data-parent="#accordion">
+                                                    <div class="card-body">
+                                                        <p class="lead">@Model.incidences[x].Item1.Responsible</p>
+                                                        <p>Tipo de la Incidencia: @Model.incidences[x].Item2.Type</p>
+                                                        <p>Descripción: @Model.incidences[x].Item2.Description</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            @{
+                                                count = count + 1;
+                                            }
+                                            <div class="card">
+                                                <div class="card-header" id="heading_@count">
+                                                    <h5 class="mb-0">
+                                                        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapse_@count" aria-expanded="false" aria-controls="collapse_@count">
+                                                            Modificación de la incidencia
+                                                        </button>
+                                                    </h5>
+                                                </div>
+                                                <div id="collapse_@count" class="collapse" aria-labelledby="heading_@count" data-parent="#accordion">
+                                                    <div class="card-body">
+                                                        <p>Registrado por: @Model.incidences[x].Item1.RegisteredBy</p>
+                                                        <p>Registrado en: @Model.incidences[x].Item1.RegisterDate</p>
+                                                        <p>Modificado por: @Model.incidences[x].Item1.ModifiedBy</p>
+                                                        <p>Modificado en: @Model.incidences[x].Item1.ModifiedDate</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            @{
+                                                count = count + 1;
+                                            }
+                                            <div class="card">
+                                                <div class="card-header" id="heading_@count">
+                                                    <h5 class="mb-0">
+                                                        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapse_@count" aria-expanded="false" aria-controls="collapse_@count">
+                                                            Más info
+                                                        </button>
+                                                    </h5>
+                                                </div>
+                                                <div id="collapse_@count" class="collapse" aria-labelledby="heading_@count" data-parent="#accordion">
+                                                    <div class="card-body">
+                                                        <p>Categoría: @Model.incidences[x].Item1.Category</p>
+                                                        <p>Estado: @Model.incidences[x].Item1.State</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            @{
+                                                count = count + 1;
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <a style="padding-left:20px;" class="btn btn-danger" asp-controller="Incidence" asp-action="Delete" asp-route-id="@Model.incidences[x].Item1.Id">Eliminar</a>
+                                <a style="padding-left:20px;" class="btn btn-secondary" asp-controller="Incidence" asp-action="Update" asp-route-id="@Model.incidences[x].Item1.Id">Cambiar</a>
+                            </div>
+                        </div>
+                    </div>
+                    @{
+                        x = x + 1;
+                    }
+                </div>
+            }
+        }
+    </div>
+</div>

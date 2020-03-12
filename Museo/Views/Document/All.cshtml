@@ -1,0 +1,54 @@
+﻿@model Dictionary<Document, string>
+
+@section Breadcrumb{
+    <li class="breadcrumb-item active">Documentos</li>
+}
+
+@{
+    int count = 0;
+    foreach (var item in Model)
+    {
+        <div>
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                <div class="card">
+                    <div class="card-header d-flex">
+                        <h4 class="card-header-title ">@item.Key.Name</h4>
+                        <div class="toolbar card-toolbar-tabs  ml-auto">
+                            <ul class="nav nav-pills" id="pills-tab" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home-@count" role="tab" aria-controls="pills-home" aria-selected="true">Descripción</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile-@count" role="tab" aria-controls="pills-profile" aria-selected="false">Autor</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact-@count" role="tab" aria-controls="pills-contact" aria-selected="false">Publicación</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="tab-content mb-3" id="pills-tabContent">
+                            <div class="tab-pane fade show active" id="pills-home-@count" role="tabpanel" aria-labelledby="pills-home-tab">
+                                <h5>Descripción</h5>
+                                <p>@item.Key.Description</p>
+                            </div>
+                            <div class="tab-pane fade" id="pills-profile-@count" role="tabpanel" aria-labelledby="pills-profile-tab">
+                                <h5>Autor:</h5><p>@item.Key.Author</p>
+                                <h5>Publicado:</h5><p>@item.Key.PublicationDate</p>
+                            </div>
+                            <div class="tab-pane fade" id="pills-contact-@count" role="tabpanel" aria-labelledby="pills-contact-tab">
+                                <h5>Fecha de subida:</h5><p> @item.Key.Date</p>
+                                <h5>Categoría: @item.Value </h5><p></p>
+                            </div>
+                        </div>
+                        <a href="~/documents/@item.Key.Manager" class="btn btn-primary">Ver</a>
+                        <a style="padding-left:20px;" class="btn btn-danger" asp-controller="Document" asp-action="Delete" asp-route-id="@item.Key.Id">Eliminar</a>
+                        <a style="padding-left:20px;" class="btn btn-secondary" asp-controller="Document" asp-action="Update" asp-route-id="@item.Key.Id">Cambiar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        count = count + 1;
+    }
+}

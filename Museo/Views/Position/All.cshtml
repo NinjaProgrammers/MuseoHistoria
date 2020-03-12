@@ -1,0 +1,25 @@
+﻿@model IEnumerable<Position>
+
+
+<div class="table-responsive">
+    <table class="table-bordered">
+        <thead class="table-primary">
+            <tr>
+                <td>Nombre</td>
+                <td>Descripcion</td>
+                <td>Cambiar</td>
+                <td>Eliminar</td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var pos in Model)
+            {
+                <tr class="d-table-row">
+                    <td class="d-table-cell">@pos.Name</td>
+                    <td class="d-table-cell">@pos.Description</td>
+                    <td > </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

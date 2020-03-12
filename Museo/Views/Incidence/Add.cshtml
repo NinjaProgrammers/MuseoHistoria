@@ -1,0 +1,76 @@
+﻿
+@model AddIncidenceViewModel
+
+@section Breadcrumb{
+    <li class="breadcrumb-item"><a asp-controller="Incidence" asp-action="All" class="breadcrumb-link">Incidencias</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Agregar</li>
+}
+
+
+<div class="row">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        <div class="card">
+            <h2 class="card-header">Inserte una nueva Incidencia</h2>
+            <form method="post" asp-controller="Incidence" asp-action="Add">
+                <div class="card-body">
+                    <div class="form-group">
+                        <label for="inputText1" class="col-form-label" asp-for="Place">Lugar</label>
+                        <input id="inputText1" type="text" asp-for="Place" class="form-control">
+                        <span asp-validation-for="Place"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputText2" class="col-form-label" asp-for="Responsible">Responsable</label>
+                        <input id="inputText2" type="text" class="form-control" asp-for="Responsible" />
+                        <span asp-validation-for="Responsible"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputText3" class="col-form-label" asp-for="Category">Categoría</label>
+                        <input id="inputText3" type="text" class="form-control" asp-for="Category">
+                        <span asp-validation-for="Category"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputText4" class="col-form-label" asp-for="State">Estado</label>
+                        <input id="inputText4" type="text" class="form-control" asp-for="State">
+                        <span asp-validation-for="State"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputText5" class="col-form-label" asp-for="RegisteredBy">Registrado por</label>
+                        <input id="inputText5" type="text" class="form-control" asp-for="RegisteredBy">
+                        <span asp-validation-for="RegisteredBy"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputText6" class="col-form-label" asp-for="RegisterDate">Fecha de Registro</label>
+                        <input id="inputText6" type="date" class="form-control" asp-for="RegisterDate">
+                        <span asp-validation-for="RegisterDate"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputText7" class="col-form-label" asp-for="ModifiedBy">Modificado por</label>
+                        <input id="inputText7" type="text" class="form-control" asp-for="ModifiedBy">
+                        <span asp-validation-for="ModifiedBy"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputText8" class="col-form-label" asp-for="ModifiedDate">Fecha de Modificación</label>
+                        <input id="inputText8" type="date" class="form-control" asp-for="ModifiedDate">
+                        <span asp-validation-for="ModifiedDate"></span>
+                    </div>
+                    <div class="form-group row">
+                        <label asp-for="IncidenceTypeId">Tipo</label>
+                        <select class="selectpicker" asp-for="IncidenceTypeId" asp-items="@Model.incidenceTypes">
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="FormControlTextarea1" asp-for="Comment">Comentario</label>
+                        <textarea class="form-control" id="FormControlTextarea1" asp-for="Comment" rows="3"></textarea>
+                        <span asp-validation-for="Comment"></span>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 ">
+                        <button class="btn btn-primary" type="submit">Insertar</button>
+                        <button class="btn btn-danger" asp-controller="Incidence" asp-action="All">Cancelar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

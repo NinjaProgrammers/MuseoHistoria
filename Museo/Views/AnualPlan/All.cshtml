@@ -1,0 +1,56 @@
+﻿@{
+    ViewData["Title"] = "Plan Anual";
+}
+
+
+@model List<AnualPlan>
+
+@section Breadcrumb{
+    <li class="breadcrumb-item active" aria-current="page">Plan Anual</li>
+}
+
+
+<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+    <div class="card">
+        <div class="card-header d-flex">
+            <h4 class="mb-0">Plan Anual</h4>
+            <div class="dropdown ml-auto">
+                <a class="toolbar" role="button" asp-controller="AnualPlan" asp-action="Add"> <i class="fa fa-angle-double-right"></i> Insertar</a>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive ">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Mes</th>
+                            <th scope="col">Año</th>
+                            <th scope="col">Valor</th>
+                            <th scope="col"></th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            for (int i = 1; i <= Model.Count; i++)
+                            {
+                                <tr>
+                                    <th scope="row">@i</th>
+                                    <td>@Model[i - 1].Month</td>
+                                    <td>@Model[i - 1].Year</td>
+                                    <td>@Model[i - 1].Value</td>
+                                    <td class=""><a asp-controller="AnualPlan" asp-action="Delete" asp-route-id=@Model[i-1].Id class="btn btn-outline-danger pull-right">Eliminar</a></td>
+                                    <td><a asp-controller="AnualPlan" asp-action="Update" asp-route-id=@Model[i-1].Id class="btn btn-outline-primary pull-right">Editar</a></td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ============================================================== -->
+<!-- end responsive table -->
+<!-- ============================================================== -->

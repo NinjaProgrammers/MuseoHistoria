@@ -1,0 +1,36 @@
+﻿
+@section Breadcrumb{
+    <li class="breadcrumb-item active">Noticias</li>
+}
+
+@model IEnumerable<News>
+
+<div class="card">
+    <div class="card-header d-flex">
+        <h4 class="mb-0">Noticias</h4>
+        <div class="dropdown ml-auto">
+            <a class="toolbar" role="button" asp-controller="News" asp-action="Add"> <i class="fa fa-angle-double-right"></i> Insertar</a>
+        </div>
+    </div>
+    <div class="card-body bg-info-light">
+        @foreach (var item in Model)
+        {
+            <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    <div class="card" id="text">
+                        <h5 class="card-header">@item.Title</h5>
+                        <div class="card-body">
+                            <p class="lead">@item.Description</p>
+                            <p class="chat-item-author">@item.Author </p>
+                            <a href="http://@item.Link">@item.Link</a>
+                        </div>
+                        <div class="card-footer">
+                            <a class="btn btn-danger" asp-controller="News" asp-action="Delete" asp-route-id="@item.Id">Eliminar</a>
+                            <a class="btn btn-primary" asp-controller="News" asp-action="Update" asp-route-id="@item.Id">Editar</a>
+                        </div>
+                    </div>                    
+                </div>
+            </div>
+        }
+    </div>
+</div>

@@ -1,0 +1,41 @@
+﻿@{
+    ViewData["Title"] = "Tema de Evento";
+}
+
+
+@section Breadcrumb{
+    <li class="breadcrumb-item"><a asp-controller="EventThematic" asp-action="All" class="breadcrumb-link">Temas de Eventos</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Crear Tema</li>
+}
+
+@model EventThematic
+
+<div class="row">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        <div class="card">
+            <h2 class="card-header">Inserte un nuevo tema de eventos</h2>
+            <form method="post" asp-controller="EventThematic" asp-action="Add">
+                <div class="card-body">
+                    <div class="form-group">
+                        <label for="inputText1" class="col-form-label" asp-for="Thematic">Nombre del Tema</label>
+                        <input id="inputText1" asp-for="Thematic" class="form-control">
+                        <span asp-validation-for="Thematic"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="FormControlTextarea1" asp-for="Description">Descripción</label>
+                        <textarea class="form-control" id="FormControlTextarea1" asp-for="Description" rows="3"></textarea>
+                        <span asp-validation-for="Description"></span>
+                    </div>
+                    <div class="card-footer">
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 ">
+                            <button class="btn btn-primary" type="submit">Insertar</button>
+                            <button class="btn btn-danger" asp-controller="EventThematic" asp-action="All">Cancelar</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+

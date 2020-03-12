@@ -1,0 +1,61 @@
+﻿@{
+    ViewData["Title"] = "Cambiar Documento";
+}
+
+
+@section Breadcrumb{
+    <li class="breadcrumb-item"><a asp-controller="DocumentCategory" asp-action="All" class="breadcrumb-link">Documentos</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Cambiar Documento</li>
+}
+
+@model AddDocumentViewModel
+
+<div class="row">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        <div class="card">
+            <h2 class="card-header">Cambiar documento</h2>
+            <form method="post" asp-controller="Document" asp-action="Update" enctype="multipart/form-data">
+                <div class="card-body">
+                    <div class="form-group">
+                        <label for="inputText1" class="col-form-label" asp-for="Name">Nombre</label>
+                        <input id="inputText1" type="text" asp-for="Name" class="form-control">
+                        <span asp-validation-for="Name"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="FormControlTextarea1" asp-for="Description">Descripción</label>
+                        <textarea class="form-control" id="FormControlTextarea1" asp-for="Description" rows="3"></textarea>
+                        <span asp-validation-for="Description"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputText2" class="col-form-label" asp-for="Author">Autor</label>
+                        <input id="inputText2" type="text" asp-for="Author" class="form-control">
+                        <span asp-validation-for="Author"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputText3" class="col-form-label" asp-for="PublicationDate">Fecha de Publicación</label>
+                        <input id="inputText3" type="date" asp-for="PublicationDate" class="form-control">
+                        <span asp-validation-for="PublicationDate"></span>
+                    </div>
+                    <div class="form-group row">
+                        <label asp-for="DocumentCategoryId">Categoría</label>
+                        <select class="selectpicker" asp-for="DocumentCategoryId" asp-items="@Model.documentCategories">
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <div class="custom-file">
+                            <label asp-for="Manager" class="custom-file-label">Escoger Archivo...</label>
+                            <input multiple asp-for="Manager" class="form-control custom-file-input" accept=".pdf,.doc" />
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 ">
+                            <button class="btn btn-primary" type="submit">Cambiar</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+

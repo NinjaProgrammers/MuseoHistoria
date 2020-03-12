@@ -1,0 +1,44 @@
+﻿@{
+    ViewData["Title"] = "Crear Plan Anual";
+}
+
+
+@section Breadcrumb{
+    <li class="breadcrumb-item"><a asp-controller="AnualPlan" asp-action="All" class="breadcrumb-link">Plan Anual</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Crear</li>
+}
+
+@model AnualPlan
+
+
+<div class="row">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        <div class="card">
+            <h2 class="card-header">Inserte un nuevo Plan Anual</h2>
+            <form method="post" asp-controller="AnualPlan" asp-action="Add">
+                <div class="card-body">
+                    <div class="form-group">
+                        <label for="inputText1" class="col-form-label" asp-for="Month">Mes</label>
+                        <input id="inputText1" type="number" asp-for="Month" class="form-control">
+                        <span asp-validation-for="Month"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputText2" class="col-form-label" asp-for="Year">Año</label>
+                        <input id="inputText2" type="text" class="form-control" asp-for="Year" />
+                        <span asp-validation-for="Year"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputText3" class="col-form-label" asp-for="Value">Valor</label>
+                        <input id="inputText3" type="text" class="form-control" asp-for="Value">
+                        <span asp-validation-for="Value"></span>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 ">
+                        <button class="btn btn-primary" type="submit">Insertar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
