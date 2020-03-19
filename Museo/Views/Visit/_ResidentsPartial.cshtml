@@ -1,0 +1,21 @@
+﻿
+@model IEnumerable<Resident>
+
+
+<table>
+    <thead>
+        <tr>
+            <td>ID</td>
+            <td>País</td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Identifier</td>
+                <td>@item.Country</td>
+            </tr>
+        }
+    </tbody>
+</table>

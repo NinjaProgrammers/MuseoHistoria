@@ -1,49 +1,60 @@
-﻿@model AllActivitiesViewModel
+﻿
+@section Breadcrumb{ 
+ <li class="breadcrumb-item active">Actividades</li>
+}
+
+@model AllActivitiesViewModel
 
 <br />
-<h1>Actividades</h1>
+<div class="card">
+    <div class="card-header d-flex">
+        <h3 class="mb-0">Actividades</h3>
+        <div class="dropdown ml-auto">
+            <a class="toolbar" role="button" asp-controller="Activity" asp-action="Add"> <i class="fa fa-angle-double-right"></i> Insertar</a>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="row">
 
-<div class="row">
-    <!-- ============================================================== -->
-    <!-- unordered list  -->
-    <!-- ============================================================== -->
-    @{
-        foreach (var act in Model.list)
-        {
-            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                <div class="card" id="u-list">
-                    <div class="card-header">
-                        <h6 class="pull-right">Estado: @act.Item1.State</h6>
-                    </div>
-                    <div class="card-body">
-                        <ul>
-                            <li>Responsable: @act.Item3.FullName</li>
-                            <li>
-                                Tipo de Actividad: @act.Item2.Name
+            @{
+                foreach (var act in Model.list)
+                {
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                        <div class="card" id="u-list">
+                            <div class="card-header">
+                                <h6 class="pull-right">Estado: @act.Item1.State</h6>
+                            </div>
+                            <div class="card-body">
                                 <ul>
-                                    <li>Descripcion: @act.Item2.Description</li>
-                                    <li>Costo: @act.Item2.Cost</li>
+                                    <li>Responsable: @act.Item3.FullName</li>
+                                    <li>
+                                        Tipo de Actividad: @act.Item2.Name
+                                        <ul>
+                                            <li>Descripcion: @act.Item2.Description</li>
+                                            <li>Costo: @act.Item2.Cost</li>
+                                        </ul>
+                                    </li>
+                                    <li>Fecha: @act.Item1.Date</li>
+                                    <li>
+                                        Cantidad de participantes
+                                        <ul>
+                                            <li>Adultos Nacionales: @act.Item1.AdultNac</li>
+                                            <li>Adultos Extranjeros: @act.Item1.AdultExt</li>
+                                            <li>Niños extranjeros: @act.Item1.ChildExt</li>
+                                            <li>Niños nacionales: @act.Item1.ChildNac</li>
+                                        </ul>
+                                    </li>
+                                    <li>Comentario: @act.Item1.Comment</li>
                                 </ul>
-                            </li>
-                            <li>Fecha: @act.Item1.Date</li>
-                            <li>
-                                Cantidad de participantes
-                                <ul>
-                                    <li>Adultos Nacionales: @act.Item1.AdultNac</li>
-                                    <li>Adultos Extranjeros: @act.Item1.AdultExt</li>
-                                    <li>Niños extranjeros: @act.Item1.ChildExt</li>
-                                    <li>Niños nacionales: @act.Item1.ChildNac</li>
-                                </ul>
-                            </li>
-                            <li>Comentario: @act.Item1.Comment</li>
-                        </ul>
+                            </div>
+                            <div class="card-footer">
+                                <a class="btn btn-primary" asp-action="Update" asp-controller="Activity" asp-route-id="@act.Item1.Id">Editar</a>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-        }
-    }
+                }
+            }
 
-    <!-- ============================================================== -->
-    <!-- end unorderd list  -->
-    <!-- ============================================================== -->
+        </div>
+    </div>
 </div>

@@ -33,7 +33,7 @@ namespace Museo.Controllers
 
         public ViewResult All()
         {
-            return View(repository.GetAll());
+            return View(repository.GetAll().ToList());
         }
         public IActionResult Delete(int Id)
         {

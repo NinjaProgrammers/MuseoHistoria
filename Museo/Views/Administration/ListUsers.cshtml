@@ -1,4 +1,4 @@
-﻿@model IEnumerable<User>
+﻿@model IEnumerable<AllUsersViewModel>
 
 @{ ViewBag.Title = "Todos los usuarios"; }
 
@@ -14,9 +14,11 @@
             <div class="card-header">
                 <h5>Nombre completo: @user.FullName</h5>
             </div>
-            <div class="card-body">               
+            <div class="card-body">
                 <h5>Nombre de usuario: @user.UserName</h5>
                 <h5>Email: @user.Email</h5>
+                <h5>Área: @user.Area</h5>
+                <h5>Cargo: @user.Position</h5>
             </div>
             <div class="card-footer"> 
                 <form method="post" asp-action="DeleteUser" asp-controller="Administration"
@@ -36,7 +38,7 @@
                 </form>
                 
             </div>
-            @*annadir el area y la posicion*@
+            
         </div>
     }
 }

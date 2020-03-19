@@ -7,5 +7,6 @@ namespace Museo.Models.Repository.Interfaces
 {
     public interface IUserRepository : IRepository<User>
     {
+        public User GetByUsername(string name);
     }
 }

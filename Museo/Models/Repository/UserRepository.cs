@@ -34,12 +34,20 @@ namespace Museo.Models.Repository
 
         public IEnumerable<User> GetAll()
         {
-            return context.Users.Where(x => x.Active);
+            foreach (var item in context.Users)
+            {
+                if (item.Active) yield return item;
+            }
         }
 
         public User GetById(object Id)
         {
             return context.Users.FirstOrDefault(x => x.Active && x.Id == (string)Id);
+        }
+
+        public User GetByUsername(string name)
+        {
+            return context.Users.FirstOrDefault(x => x.Active && x.UserName == name);
         }
 
         public User Select(User entity)
@@ -63,6 +71,57 @@ namespace Museo.Models.Repository
             }
             context.SaveChanges();
             return item;
+        }
+
+        public IEnumerable<User> MoreActivitiesWorker(int count = 10)
+        {
+            var act = context.Activities.ToList();
+            Dictionary<string, int> user_cant = new Dictionary<string, int>();
+
+            foreach (var item in act)
+            {
+                if (user_cant.ContainsKey(item.UserId))
+                    user_cant[item.UserId] += 1;
+                else
+                    user_cant.Add(item.UserId, 1);
+            }
+
+            List<Tuple<int, string>> a = new List<Tuple<int, string>>();
+
+            foreach (var item in user_cant)
+            {
+                a.Add(new Tuple<int, string>(item.Value, item.Key));
+            }
+            a.Sort();
+            a.Reverse();
+
+
+            for (int i = 0; i < count && i < a.Count; i++)
+            {
+                yield return context.Users.First(x => x.Id == a[i].Item2);
+            }
+
+        }
+
+        public IEnumerable<User> ParticipActivitiesWorker(int count)
+        {
+            var act = context.Activities.ToList();
+            List<Tuple<int, string>> a = new List<Tuple<int, string>>();
+
+            foreach (var item in act)
+            {
+
+                int participants = item.AdultExt + item.AdultNac + item.ChildNac + item.ChildExt;
+                a.Add(new Tuple<int, string>(participants, item.UserId));
+            }
+
+            a.Sort();
+
+            for (int i = 0; i < count && i < a.Count; i++)
+            {
+                yield return context.Users.First(x => x.Id == a[i].Item2);
+            }
+
         }
     }
 }

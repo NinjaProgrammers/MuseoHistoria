@@ -1,2 +1,37 @@
-﻿
-<h1>Esta es la vista de Users</h1>
+﻿@section Breadcrumb{
+    <li class="breadcrumb-item active" aria-current="page">Usuarios</li>
+}
+
+@model IEnumerable<AllUsersViewModel>
+
+
+<div class="row" style="height:350px;">
+
+    @foreach (var item in Model)
+    {
+        var s = item.UserName + ".jpg";
+        if (item.Active)
+        {
+        <div class="col-xl-4 col-lg-6 col-md-12 col-sm-12 col-12" >
+            <div class="product-thumbnail">
+                <div class="product-img-head">
+                    <div class="product-img">
+                        <img style="height:300px;" src="~/images/@s" alt="@item.UserName" class="img-fluid">
+                    </div>
+                </div>
+                <div class="product-content">
+                    <div class="product-content-head">
+                        <h3 class="product-title">@item.UserName</h3>
+                        <div class="product-description">@item.FullName</div>
+                        <div class="product-details">
+                            <p>@item.Email</p>
+                            <p>@item.Area</p>
+                            <p>@item.Position</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        }
+    }
+</div>

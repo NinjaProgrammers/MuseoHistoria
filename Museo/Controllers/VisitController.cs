@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Museo.Models;
 using Museo.Models.Repository.Interfaces;
+using Museo.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,17 +25,42 @@ namespace Museo.Controllers
 
         public ViewResult Add()
         {
-            return View();
+            AddVisitViewModel viewModel = new AddVisitViewModel();
+            return View(viewModel);
         }
 
         [HttpPost]
-        public IActionResult Add(Visit item)
+        public IActionResult Add(AddVisitViewModel item)
         {
             if (!ModelState.IsValid)
-                return View();
-            repository.AddEntity(item);
+                return View(item);
+            Visit visit = new Visit()
+            {
+                Active = true,
+                AdultExt = item.AdultExt,
+                AdultNac = item.AdultNac,
+                ChildAlone = item.ChildAlone,
+                ChildExt = item.ChildExt,
+                ChildsCom = item.ChildsCom,
+                Date = item.Date,
+                UserId = item.UserId
+            };
+
+            repository.AddEntity(visit);
+
+            foreach (var res in item.residents)
+            {
+                ResidentVisit residentVisit = new ResidentVisit()
+                {
+                    ResidentId = res.Id,
+                    VisitId = visit.Id,
+                    Active = true
+                };
+            }
+
             return RedirectToAction("All");
         }
+
         public IActionResult Delete(int Id)
         {
             repository.Delete(Id);

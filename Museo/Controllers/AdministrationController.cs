@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Museo.Models;
+using Museo.Models.Repository.Interfaces;
 using Museo.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -10,17 +11,22 @@ using System.Threading.Tasks;
 
 namespace Museo.Controllers
 {
+    //[AllowAnonymous]
     [Authorize(Roles = "Admin")]
     public class AdministrationController : Controller
     {
         private readonly RoleManager<IdentityRole> roleManager;
         private readonly UserManager<User> userManager;
+        private readonly IAreaRepository areaRepository;
+        private readonly IPositionRepository positionRepository;
 
         public AdministrationController(RoleManager<IdentityRole> roleManager, 
-            UserManager<User> userManager)
+            UserManager<User> userManager, IAreaRepository areaRepository, IPositionRepository positionRepository)
         {
             this.roleManager = roleManager;
             this.userManager = userManager;
+            this.areaRepository = areaRepository;
+            this.positionRepository = positionRepository;
         }
 
         [HttpGet]
@@ -156,10 +162,9 @@ namespace Museo.Controllers
 
             for(int i=0; i<model.Count; i++)
             {
-                var user = await userManager.FindByIdAsync(model[i].UserId);
+                User user = await userManager.FindByIdAsync(model[i].UserId);
 
-                IdentityResult result = null;
-
+                IdentityResult result;
                 if (model[i].IsSelected && !(await userManager.IsInRoleAsync(user, role.Name)))
                     result = await userManager.AddToRoleAsync(user, role.Name);
                 else if (!model[i].IsSelected && await userManager.IsInRoleAsync(user, role.Name))
@@ -176,7 +181,22 @@ namespace Museo.Controllers
 
         public IActionResult ListUsers()
         {
-            return View(userManager.Users);
+            List<AllUsersViewModel> viewModels = new List<AllUsersViewModel>();
+            foreach (var item in userManager.Users)
+            {
+                AllUsersViewModel model = new AllUsersViewModel()
+                {
+                    Id = item.Id,
+                    Area = areaRepository.GetById(item.AreaId).Name,
+                    Position = positionRepository.GetById(item.PositionId).Name,
+                    UserName = item.UserName,
+                    FullName = item.FullName,
+                    Email = item.Email,
+                    Active = item.Active
+                };
+                viewModels.Add(model);
+            }
+            return View(viewModels);
         }
 
         [Authorize(Policy = "EditUserPolicy")]

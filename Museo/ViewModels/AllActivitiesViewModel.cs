@@ -8,6 +8,10 @@ namespace Museo.ViewModels
 {
     public class AllActivitiesViewModel
     {
-        public List<Tuple<Activity, TypeAct, User>> list;
+        public AllActivitiesViewModel()
+        {
+            list = new List<(Activity, TypeAct, User)>();
+        }
+        public List<(Activity, TypeAct, User)> list;
     }
 }

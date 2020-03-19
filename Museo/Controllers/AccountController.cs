@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Museo.Models;
+using Museo.Models.Repository.Interfaces;
 using Museo.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -17,23 +18,30 @@ namespace Museo.Controllers
         private readonly UserManager<User> userManager;
         private readonly SignInManager<User> signInManager;
         private readonly IWebHostEnvironment hostingEnvironment;
+        private readonly IAreaRepository areaRepository;
+        private readonly IPositionRepository positionRepository;
 
         public AccountController(UserManager<User> userManager, SignInManager<User> signInManager, 
-            IWebHostEnvironment hostingEnvironment)
+            IWebHostEnvironment hostingEnvironment,IAreaRepository areaRepository, IPositionRepository positionRepository)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.hostingEnvironment = hostingEnvironment;
+            this.areaRepository = areaRepository;
+            this.positionRepository = positionRepository;
         }
 
-        [Authorize(Policy = "AddUserPolicy")]
+        //[Authorize(Policy = "AddUserPolicy")]
+        [AllowAnonymous]
         public IActionResult Register()
         {
-            return View();
+            RegisterViewModel viewModel = new RegisterViewModel(areaRepository.GetAll(), positionRepository.GetAll());
+            return View(viewModel);
         }
 
         [HttpPost]
-        [Authorize(Policy = "AddUserPolicy")]
+        //[Authorize(Policy = "AddUserPolicy")]
+        [AllowAnonymous]
         public async Task<IActionResult> Register(RegisterViewModel model)
         {
             if(ModelState.IsValid)
@@ -53,8 +61,9 @@ namespace Museo.Controllers
                     FullName = model.FullName,
                     Email = model.Email,
                     Photo = uniqueFileName,
-                    PositionId = 1,
-                    AreaId = 1
+                    PositionId = model.PositionId,
+                    AreaId = model.AreaId,
+                    Active = true
                 };
                 var result = await userManager.CreateAsync(user, model.Password);
                 if(result.Succeeded)               

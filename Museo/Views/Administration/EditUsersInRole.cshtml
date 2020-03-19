@@ -16,12 +16,12 @@
                 <div class="form-check m-1">
                     <input type="hidden" asp-for="@Model[i].UserId" />
                     <input type="hidden" asp-for="@Model[i].UserName" />
-                    @if (User.Claims.FirstOrDefault(c => c.Type == 
-                        ClaimTypes.NameIdentifier).Value == Model[i].UserId)
+                    @if (User.Claims.FirstOrDefault(c => c.Type ==
+                       ClaimTypes.NameIdentifier).Value == Model[i].UserId)
                     {
-
+                        <input type="hidden" asp-for="@Model[i].IsSelected" />
                         <input asp-for="@Model[i].IsSelected" class="form-check-input" disabled />
-                        <label class="form-check-label" asp-for="@Model[i].IsSelected" disabled>
+                        <label class="form-check-label">
                             @Model[i].UserName
                         </label>
                     }

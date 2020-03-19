@@ -27,6 +27,7 @@ namespace Museo.Models
 
         public bool Active { get; set; }
         public string UserId { get; set; }
+        [Required]
         public DateTime Date { get; set; }
         public List<ResidentVisit> ResidentVisits { get; set; }
 

@@ -356,7 +356,6 @@ C:\Users\Claudia's PC\Documents\GitHub\MuseoHistoria\Museo\obj\Debug\netcoreapp3
 C:\Users\Claudia's PC\Documents\GitHub\MuseoHistoria\Museo\obj\Debug\netcoreapp3.0\Razor\Views\Shared\ErrorPage.cshtml.g.cs
 C:\Users\Claudia's PC\Documents\GitHub\MuseoHistoria\Museo\obj\Debug\netcoreapp3.0\Razor\Views\Shared\_Layout.cshtml.g.cs
 C:\Users\Claudia's PC\Documents\GitHub\MuseoHistoria\Museo\obj\Debug\netcoreapp3.0\Razor\Views\Shared\_ValidationScriptsPartial.cshtml.g.cs
-C:\Users\Claudia's PC\Documents\GitHub\MuseoHistoria\Museo\obj\Debug\netcoreapp3.0\Razor\Views\Users\Add.cshtml.g.cs
 C:\Users\Claudia's PC\Documents\GitHub\MuseoHistoria\Museo\obj\Debug\netcoreapp3.0\Razor\Views\Users\All.cshtml.g.cs
 C:\Users\Claudia's PC\Documents\GitHub\MuseoHistoria\Museo\obj\Debug\netcoreapp3.0\Razor\Views\_ViewImports.cshtml.g.cs
 C:\Users\Claudia's PC\Documents\GitHub\MuseoHistoria\Museo\obj\Debug\netcoreapp3.0\Razor\Views\_ViewStart.cshtml.g.cs
@@ -366,7 +365,6 @@ C:\Users\Claudia's PC\Documents\GitHub\MuseoHistoria\Museo\obj\Debug\netcoreapp3
 C:\Users\Claudia's PC\Documents\GitHub\MuseoHistoria\Museo\obj\Debug\netcoreapp3.0\Museo.csproj.CopyComplete
 C:\Users\Claudia's PC\Documents\GitHub\MuseoHistoria\Museo\obj\Debug\netcoreapp3.0\Museo.dll
 C:\Users\Claudia's PC\Documents\GitHub\MuseoHistoria\Museo\obj\Debug\netcoreapp3.0\Museo.pdb
-C:\Users\Claudia's PC\Documents\GitHub\MuseoHistoria\Museo\obj\Debug\netcoreapp3.0\Museo.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\Claudia's PC\Documents\GitHub\MuseoHistoria\Museo\obj\Debug\netcoreapp3.0\Razor\Views\Position\Update.cshtml.g.cs
 C:\Users\Claudia's PC\Documents\GitHub\MuseoHistoria\Museo\obj\Debug\netcoreapp3.0\Razor\Views\Resident\Add.cshtml.g.cs
 C:\Users\Claudia's PC\Documents\GitHub\MuseoHistoria\Museo\obj\Debug\netcoreapp3.0\Razor\Views\Resident\All.cshtml.g.cs
@@ -375,3 +373,11 @@ C:\Users\Claudia's PC\Documents\GitHub\MuseoHistoria\Museo\obj\Debug\netcoreapp3
 C:\Users\Claudia's PC\Documents\GitHub\MuseoHistoria\Museo\obj\Debug\netcoreapp3.0\Razor\Views\TypeAct\All.cshtml.g.cs
 C:\Users\Claudia's PC\Documents\GitHub\MuseoHistoria\Museo\obj\Debug\netcoreapp3.0\Razor\Views\TypeAct\Update.cshtml.g.cs
 C:\Users\Claudia's PC\Documents\GitHub\MuseoHistoria\Museo\obj\Debug\netcoreapp3.0\Razor\Views\Area\Update.cshtml.g.cs
+C:\Users\Claudia's PC\Documents\GitHub\MuseoHistoria\Museo\obj\Debug\netcoreapp3.0\Razor\Views\Visit\Add.cshtml.g.cs
+C:\Users\Claudia's PC\Documents\GitHub\MuseoHistoria\Museo\obj\Debug\netcoreapp3.0\Razor\Views\Visit\_ResidentsPartial.cshtml.g.cs
+C:\Users\Claudia's PC\Documents\GitHub\MuseoHistoria\Museo\bin\Debug\netcoreapp3.0\PagedList.dll
+C:\Users\Claudia's PC\Documents\GitHub\MuseoHistoria\Museo\bin\Debug\netcoreapp3.0\PagedList.Mvc.dll
+C:\Users\Claudia's PC\Documents\GitHub\MuseoHistoria\Museo\bin\Debug\netcoreapp3.0\AjaxControlToolkit.dll
+C:\Users\Claudia's PC\Documents\GitHub\MuseoHistoria\Museo\obj\Debug\netcoreapp3.0\Museo.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Claudia's PC\Documents\GitHub\MuseoHistoria\Museo\obj\Debug\netcoreapp3.0\Razor\Views\Activity\Update.cshtml.g.cs
+C:\Users\Claudia's PC\Documents\GitHub\MuseoHistoria\Museo\obj\Debug\netcoreapp3.0\Razor\Views\Visit\All.cshtml.g.cs

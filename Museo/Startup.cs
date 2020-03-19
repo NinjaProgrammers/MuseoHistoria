@@ -105,6 +105,7 @@ namespace Museo
             services.AddScoped<IResidentRepository, ResidentRepository>();
             services.AddScoped<ITypeActRepository, TypeActRepository>();            
             services.AddScoped<IVisitRepository, VisitRepository>();
+            services.AddScoped<IResidentVisitRepository, ResidentVisitRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

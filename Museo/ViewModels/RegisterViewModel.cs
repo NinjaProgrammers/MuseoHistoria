@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Museo.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -10,6 +12,24 @@ namespace Museo.ViewModels
 {
     public class RegisterViewModel
     {
+        public RegisterViewModel()
+        {
+
+        }
+
+        public RegisterViewModel(IEnumerable<Area> areas, IEnumerable<Position> positions)
+        {
+            this.areas = new List<SelectListItem>();
+            this.positions = new List<SelectListItem>();
+            foreach (var item in areas)
+            {
+                this.areas.Add(new SelectListItem { Value = item.Id.ToString(), Text = item.Name });
+            }
+            foreach (var item in positions)
+            {
+                this.positions.Add(new SelectListItem { Value = item.Id.ToString(), Text = item.Name });
+            }
+        }
 
         [Required(ErrorMessage = "Introduzca un nombre de usuario")]
         [MaxLength(20, ErrorMessage = "Caracteres máximos excedidos")]
@@ -36,5 +56,11 @@ namespace Museo.ViewModels
         public string Email { get; set; }
 
         public IFormFile Photo { get; set; }
+
+        public List<SelectListItem> areas { get; set; }
+        public List<SelectListItem> positions { get; set; }
+        public int AreaId { get; set; }
+        public int PositionId { get; set; }
+
     }
 }

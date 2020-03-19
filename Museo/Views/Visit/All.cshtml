@@ -1,0 +1,15 @@
+﻿
+@section Breadcrumb{
+    <li class="breadcrumb-item active">Visitas</li>
+}
+
+@model IEnumerable<Visit>
+
+<div class="card">
+    <div class="card-header d-flex">
+        <h4 class="mb-0">Visita</h4>
+        <div class="dropdown ml-auto">
+            <a class="toolbar" role="button" asp-controller="Visit" asp-action="Add"> <i class="fa fa-angle-double-right"></i> Insertar</a>
+        </div>
+    </div>
+</div>

@@ -38,7 +38,14 @@
                     <input asp-for="Photo" class="form-control custom-file-input" />
                 </div>
             </div>
-            @*annadir el area y la posicion*@
+            <div class="form-group"> 
+                <h5 asp-for="AreaId">Área</h5>
+            <select class="selectpicker" id="my-select" asp-for="AreaId" asp-items="@Model.areas"></select>
+            </div>
+            <div class="form-group">
+                <h5 asp-for="PositionId">Cargo</h5>
+                <select class="selectpicker" id="my-select" asp-for="PositionId" asp-items="@Model.positions"></select>
+            </div>
             <button type="submit" class="btn btn-primary">Registrarse</button>
         </form>
     </div>

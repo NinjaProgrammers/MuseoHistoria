@@ -1,17 +1,29 @@
 ﻿
-@model Activity
+@section Styles{
+    <link href="~/lib/assets/vendor/datepicker/tempusdominus-bootstrap-4.css" rel="stylesheet" />
+}
+
+@section Breadcrumb{
+    <li class="breadcrumb-item"><a asp-controller="Activity" asp-action="All">Actividades</a></li>
+    <li class="breadcrumb-item active">Insertar</li>
+}
+
+@model AddActivityViewModel
 
 
 <div class="row">
     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-        <div class="card">
-            <h2 class="card-header">Inserte una nueva Actividad</h2>
-            <div class="card-body">
-                <form>
+        <form method="post">
+            <div class="card">                
+                <div class="card-body">
                     <div class="form-group">
-                        <label for="inputText1" class="col-form-label" asp-for="Date">Inserte Fecha</label>
-                        <input id="inputText1" asp-for="Date" class="form-control">
-                        <span asp-validation-for="Date"></span>
+                        <label for="datetimepicker10" class="col-form-label" asp-for="Date">Fecha</label>
+                        <div class="input-group date" id="datetimepicker10" data-target-input="nearest">
+                            <input class="form-control datetimepicker-input" data-target="#datetimepicker10" asp-for="Date" />
+                            <div class="input-group-append" data-target="#datetimepicker10" data-toggle="datetimepicker">
+                                <div class="input-group-text"><i class="fa fa-calendar-alt"></i></div>
+                            </div>
+                        </div>
                     </div>
                     <div class="form-group">
                         <label for="inputText2" class="col-form-label" asp-for="AdultExt">Cantidad de adultos extranjeros</label>
@@ -48,10 +60,84 @@
                         <textarea class="form-control" id="FormControlTextarea1" asp-for="Comment" rows="3"></textarea>
                         <span asp-validation-for="Comment"></span>
                     </div>
-                </form>
+                    <div class="form-group">
+                        <select class="selectpicker" asp-items="@Model.TypeActs" asp-for="TypeActId">Tipos de Actividades</select>
+                    </div>
+                    <input type="hidden" asp-for="Username" value="@User.Identity.Name" />
+
+                </div>
+                <div class="card-footer">
+                    <button class="btn btn-primary" asp-action="Add" asp-controller="Activity">Insertar</button>
+                </div>
             </div>
-        </div>
+        </form>
     </div>
 </div>
 
+
+
+@section Scripts{
+    <script src="~/lib/assets/vendor/bootstrap-select/js/bootstrap-select.js"></script>
+    <script src="~/lib/assets/vendor/datepicker/moment.js"></script>
+    <script src="~/lib/assets/vendor/datepicker/datepicker.js"></script>
+    <script src="~/lib/assets/vendor/datepicker/tempusdominus-bootstrap-4.js"></script>
+    <script src="~/lib/assets/vendor/multi-select/js/jquery.multi-select.js"></script>
+    <script>
+        $('#my-select, #pre-selected-options').multiSelect()
+    </script>
+    <script>
+        $('#callbacks').multiSelect({
+            afterSelect: function (values) {
+                alert("Select value: " + values);
+            },
+            afterDeselect: function (values) {
+                alert("Deselect value: " + values);
+            }
+        });
+    </script>
+    <script>
+        $('#keep-order').multiSelect({ keepOrder: true });
+    </script>
+    <script>
+        $('#public-methods').multiSelect();
+        $('#select-all').click(function () {
+            $('#public-methods').multiSelect('select_all');
+            return false;
+        });
+        $('#deselect-all').click(function () {
+            $('#public-methods').multiSelect('deselect_all');
+            return false;
+        });
+        $('#select-100').click(function () {
+            $('#public-methods').multiSelect('select', ['elem_0', 'elem_1'..., 'elem_99']);
+            return false;
+        });
+        $('#deselect-100').click(function () {
+            $('#public-methods').multiSelect('deselect', ['elem_0', 'elem_1'..., 'elem_99']);
+            return false;
+        });
+        $('#refresh').on('click', function () {
+            $('#public-methods').multiSelect('refresh');
+            return false;
+        });
+        $('#add-option').on('click', function () {
+            $('#public-methods').multiSelect('addOption', { value: 42, text: 'test 42', index: 0 });
+            return false;
+        });
+    </script>
+    <script>
+        $('#optgroup').multiSelect({ selectableOptgroup: true });
+    </script>
+    <script>
+        $('#disabled-attribute').multiSelect();
+    </script>
+    <script>
+        $('#custom-headers').multiSelect({
+            selectableHeader: "<div class='custom-header'>Selectable items</div>",
+            selectionHeader: "<div class='custom-header'>Selection items</div>",
+            selectableFooter: "<div class='custom-header'>Selectable footer</div>",
+            selectionFooter: "<div class='custom-header'>Selection footer</div>"
+        });
+    </script>
+}
 

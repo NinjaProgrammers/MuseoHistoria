@@ -1,0 +1,103 @@
+﻿
+
+@{
+    ViewData["Title"] = "Registrar Visita";
+}
+
+
+@section Breadcrumb{
+    <li class="breadcrumb-item"><a asp-controller="Visit" asp-action="All" class="breadcrumb-link">Visitas</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Insertar</li>
+}
+
+@model AddVisitViewModel
+
+
+<div class="row">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        <div class="card">
+            <h2 class="card-header">Inserte una nueva Visita</h2>
+            <form method="post">
+                <div class="card-body">
+                    <div class="form-group">
+                        <label for="datetimepicker1" class="col-form-label" asp-for="Date">Fecha</label>
+                        <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
+                            <input class="form-control datetimepicker-input" data-target="#datetimepicker1" asp-for="Date" />
+                            <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
+                                <div class="input-group-text"><i class="fa fa-calendar-alt"></i></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-form-label" asp-for="AdultExt">Cantidad de Adultos Extranjeros</label>
+                        <input type="number" asp-for="AdultExt" class="form-control">
+                        <span asp-validation-for="AdultExt"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-form-label" asp-for="AdultNac">Cantidad de Adultos Nacionales</label>
+                        <input type="number" asp-for="AdultNac" class="form-control">
+                        <span asp-validation-for="AdultNac"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-form-label" asp-for="ChildsCom">Cantidad de Menores Acompañados</label>
+                        <input type="number" asp-for="ChildsCom" class="form-control">
+                        <span asp-validation-for="ChildsCom"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-form-label" asp-for="ChildAlone">Cantidad de Menores Solos</label>
+                        <input type="number" asp-for="ChildAlone" class="form-control">
+                        <span asp-validation-for="ChildAlone"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-form-label" asp-for="ChildExt">Cantidad de Menores Extranjeros</label>
+                        <input type="number" asp-for="ChildExt" class="form-control">
+                        <span asp-validation-for="ChildExt"></span>
+                    </div>
+                    <br />
+                    <div class="form-group">
+                        <label class="col-form-label" asp-for="Identifier">ID</label>
+                        <input type="text" asp-for="Identifier" class="form-control">
+                        <span asp-validation-for="Identifier"></span>
+                        <label class="col-form-label" asp-for="Country">País</label>
+                        <input type="text" asp-for="Country" class="form-control">
+                        <span asp-validation-for="Country"></span>
+                        <button asp-action="AddInVisit" asp-controller="Resident" class="btn btn-outline-primary">Insertar Residente</button>
+                    </div>
+                    <div class="card">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <td scope="col">ID</td>
+                                    <td scope="col">País</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @for (int i = 1; i <= Model.residents.Count; i++)
+                                {
+                                    <tr>
+                                        <th scope="row">@i</th>
+                                        <input type="hidden" asp-for="residents[i-1].Identifier" />
+                                        <td>@Model.residents[i-1].Identifier</td>
+
+                                        <input type="hidden" asp-for="residents[i-1].Country" />
+                                        <td>@Model.residents[i-1].Country</td>
+                                        <input type="hidden" asp-for="@Model.residents[i-1].Id" />
+                                        <input type="hidden" asp-for="RemoveIndex" value="@i" />
+                                        <td><button type="submit" class="btn btn-primary" asp-action="RemoveInVisit" asp-controller="Resident"><i class="fa fa-times"></i></button></td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    <br />
+                    <div class="card-footer">
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 ">
+                            <button class="btn btn-primary" type="submit" asp-action="Add" asp-controller="Visit">Insertar</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -15,6 +15,8 @@ namespace Museo.Models
         [Range(0, float.MaxValue, ErrorMessage = "El costo debe ser mayor que cero")]
         public float Cost { get; set; }
 
+        public int CoverPrice { get; set; }
+
         public string Name { get; set; }
     }
 }
