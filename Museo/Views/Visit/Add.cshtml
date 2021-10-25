@@ -1,4 +1,7 @@
-﻿
+﻿@section Styles{
+    <link href="~/lib/assets/vendor/datepicker/tempusdominus-bootstrap-4.css" rel="stylesheet" />
+}
+
 
 @{
     ViewData["Title"] = "Registrar Visita";
@@ -78,10 +81,10 @@
                                     <tr>
                                         <th scope="row">@i</th>
                                         <input type="hidden" asp-for="residents[i-1].Identifier" />
-                                        <td>@Model.residents[i-1].Identifier</td>
+                                        <td>@Model.residents[i - 1].Identifier</td>
 
                                         <input type="hidden" asp-for="residents[i-1].Country" />
-                                        <td>@Model.residents[i-1].Country</td>
+                                        <td>@Model.residents[i - 1].Country</td>
                                         <input type="hidden" asp-for="@Model.residents[i-1].Id" />
                                         <input type="hidden" asp-for="RemoveIndex" value="@i" />
                                         <td><button type="submit" class="btn btn-primary" asp-action="RemoveInVisit" asp-controller="Resident"><i class="fa fa-times"></i></button></td>
@@ -101,3 +104,10 @@
         </div>
     </div>
 </div>
+
+@section Scripts{
+    <script src="~/lib/assets/vendor/bootstrap-select/js/bootstrap-select.js"></script>
+    <script src="~/lib/assets/vendor/datepicker/moment.js"></script>
+    <script src="~/lib/assets/vendor/datepicker/datepicker.js"></script>
+    <script src="~/lib/assets/vendor/datepicker/tempusdominus-bootstrap-4.js"></script>    
+}

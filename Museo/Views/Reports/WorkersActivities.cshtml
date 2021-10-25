@@ -1,1 +1,64 @@
-﻿<h1>Trabajadores con mas actividades</h1>
+﻿
+
+@{
+    ViewData["Title"] = "Trabajadores con mas Actividades";
+}
+
+
+@section Breadcrumb{
+    <li class="breadcrumb-item"><a class="breadcrumb-link">Trabajadores con más Actividades</a></li>
+}
+
+@model List<(int,User)>
+
+
+
+<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+    <div class="card">
+        <div class="card-header d-flex">
+            <h4 class="mb-0">Trabajadores con más Actividades</h4>
+            <div class="dropdown ml-auto">
+                <div class="input-group mb-3">
+                    <label class="label">Ver más</label>
+                    <a  class="btn btn-primary" asp-action="WorkersActivities" asp-controller="Reports"><i class="fas fa-search"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <td>#</td>
+                            <td>Actividades</td>
+                            <td>Name</td>
+                            <td>Primer Apellido</td>
+                            <td>Segundo Apellido</td>
+                            <td>Área</td>
+                            <td>Cargo</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{ 
+                            for (int i = 1; i <= Model.Count; i++)
+                            {
+                                <tr>
+                                    <td>@i</td>
+                                    <td>@Model[i-1].Item1</td>
+                                    <td>@Model[i-1].Item2.FullName</td>
+                                    <td>@Model[i-1].Item2.First</td>
+                                    <td>@Model[i-1].Item2.Last</td>
+                                    <td>@Model[i-1].Item2.Area.Name</td>
+                                    <td>@Model[i-1].Item2.Position.Name</td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="card-footer">
+        </div>
+    </div>
+</div>
+

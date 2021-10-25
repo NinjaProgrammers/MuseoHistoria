@@ -5,9 +5,19 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace Museo.Controllers
 {
+    internal class EventView
+    {
+        public string start { get; set; }
+        public string title { get; set; }
+        public string backgroundColor { get; set; }
+        public string borderColor { get; set; }
+        public string url { get; set; }
+
+    }
     public class EventController : Controller
     {
 
@@ -16,7 +26,8 @@ namespace Museo.Controllers
         private readonly IPersonalityInEventRepository personalityRepository;
         private readonly IEORepository eORepository;
 
-        public EventController(IEventRepository repository, IEventOrganizerRepository organizerRepository, IPersonalityInEventRepository personalityRepository, IEORepository eORepository)
+        public EventController(IEventRepository repository, IEventOrganizerRepository organizerRepository, IPersonalityInEventRepository personalityRepository,
+            IEORepository eORepository)
         {
             this.repository = repository;
             this.organizerRepository = organizerRepository;
@@ -24,34 +35,51 @@ namespace Museo.Controllers
             this.eORepository = eORepository;
         }
 
-        public ViewResult EventCalendar()
+
+        public IActionResult Event(int id)
         {
-            string events = "[";
-            var list = repository.GetAll();
+            var item = repository.GetById(id);
+            EventViewModel e = new EventViewModel(item);
+            e.Personalities = personalityRepository.PersonalitiesInEvent(item.Id).ToList();
+            e.Organizers = eORepository.OrganizersInEvent(item.Id).ToList();
+            e.EventThmatic = repository.Theme(item.EventThmaticId);
+            e.EventType = repository.Type(item.EventTypeId);
 
-            foreach (var x in list)
+            return View(e);
+        }
+
+        public ViewResult Calendar()
+        {
+            string[] Colors = { "#ef172c", "#4285F4", "#25d5f2", "#ff407b", "#ffc108" };
+
+            Random r = new Random();
+
+            List<EventView> list = new List<EventView>();
+            foreach (var item in repository.GetAll())
             {
-                events = "{";
-                events += $"title: '{x.EventName},start: '{x.Date}, backgroundColor: '#ffc108'";
-                events += "}";
+                var month = item.Date.Month.ToString().Length == 1 ? "0" + item.Date.Month.ToString() : item.Date.Month.ToString();
+                var day = item.Date.Day.ToString().Length == 1 ? "0" + item.Date.Day.ToString() : item.Date.Day.ToString();
+                EventView eventView = new EventView()
+                {
+                    backgroundColor = Colors[r.Next(0, 5)],
+                    start = item.Date.Year.ToString() + "-" + month + "-" + day,
+                    title = item.EventName,
+                    url = Url.Action("Event", "Event", new { id = item.Id})
+                };
+                eventView.borderColor = eventView.backgroundColor;
+                list.Add(eventView);
             }
-            events += "]";
+            JsonSerializerSettings jsonSerializer = new JsonSerializerSettings()
+            {
+                NullValueHandling = NullValueHandling.Ignore
+            };
 
-            //string s = "[{       title: 'All Day Event',start: '2018-03-01',},{title: 'Long Event',start: '2018-03-07'," +
-            //    "                    end: '2018-03-10'},{id: 999,title: 'Repeating Event',start: '2018-03-09T16:00:00',backgroundColor: '#ffc108',borderColor: '#ffc108'                },   " +
-            //    "             {id: 999,title: 'Repeating Event',start: '2018-03-16T16:00:00',backgroundColor: '#ffc108',borderColor: '#ffc108'},{title: 'Conference',                    start: '2018-03-11',                    end: '2018-03-13'," +
-            //    "                    backgroundColor: '#ff407b',borderColor: '#ff407b'},{title: 'Meeting',start: '2018-03-12T10:30:00;end: '2018-03-12T12:30:00',borderColor: '#25d5f2'                },                {                    title: 'Lunch'," +
-            //    "                    start: '2018-03-12T12:00:00',                    backgroundColor: '#ff407b',                    borderColor: '#ff407b'                }," +
-            //    "               {                    title: 'Meeting',                    start: '2018-03-12T14:30:00',                    backgroundColor: '#25d5f2'," +
-            //    "                                borderColor: '#25d5f2'                },                {                    title: 'Happy Hour'," +
-            //    "                    start: '2018-03-12T17:30:00'                },                {                    title: 'Dinner'," +
-            //    "                    start: '2018-03-12T20:00:00'                },                {                    title: 'Birthday Party'," +
-            //    "                    start: '2018-03-13T07:00:00',                    backgroundColor: '#ef172c',                    borderColor: '#ef172c'" +
-            //    "                },                {                    title: 'Click for Google',                    url: 'http://google.com/',             " +
-            //    "       start: '2018-03-28',                    backgroundColor: '#4285F4',                    borderColor: '#4285F4'                }            ]";
-            var j = Json(events);
-            return View("All", list.ToList());
-            //return View(list.ToList());
+            CalendarViewModel viewModel = new CalendarViewModel()
+            {
+                DefaultDate = JsonConvert.SerializeObject(DateTime.Now.Date),
+                Events = JsonConvert.SerializeObject(list, jsonSerializer)
+            };
+            return View(viewModel);
         }
         public ViewResult All()
         {
@@ -93,23 +121,29 @@ namespace Museo.Controllers
             e.TotalParticipant = eventx.TotalParticipant;
             Event inserted = repository.AddEntity(e);
 
-            foreach (var item in eventx.PersonalityIds)
+            if (eventx.PersonalityIds != null)
             {
-                PersonalityInEvent p = new PersonalityInEvent()
+                foreach (var item in eventx.PersonalityIds)
                 {
-                    EventId = inserted.Id,
-                    EventPersonalityId = item
-                };
-                personalityRepository.AddEntity(p);
+                    PersonalityInEvent p = new PersonalityInEvent()
+                    {
+                        EventId = inserted.Id,
+                        EventPersonalityId = item
+                    };
+                    personalityRepository.AddEntity(p);
+                }
             }
-            foreach (var item in eventx.OrganizerIds)
+            if (eventx.OrganizerIds != null)
             {
-                EO o = new EO()
+                foreach (var item in eventx.OrganizerIds)
                 {
-                    EventId = inserted.Id,
-                    EventOrganizerId = item
-                };
-                eORepository.AddEntity(o);
+                    EO o = new EO()
+                    {
+                        EventId = inserted.Id,
+                        EventOrganizerId = item
+                    };
+                    eORepository.AddEntity(o);
+                }
             }
             return RedirectToAction("All");
         }

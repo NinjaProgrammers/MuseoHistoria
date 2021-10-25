@@ -153,20 +153,36 @@
                                 <div id="submenu-1" class="collapse submenu" style="">
                                     <ul class="nav flex-column">
                                         <li class="nav-item">
-                                            <a class="nav-link" asp-controller="Reports" asp-action="AllReports" data-toggle="collapse" aria-expanded="false" data-target="#submenu-2" aria-controls="submenu-2"><i class="fas fa-fw fa-calculator"></i>Flujo de Visitantes</a>
+                                            <a class="nav-link" data-toggle="collapse" aria-expanded="false" data-target="#submenu-2" aria-controls="submenu-2"><i class="fas fa-fw fa-hand-holding-usd"></i>Ganancias</a>
                                             <div id="submenu-2" class="collapse submenu" style="">
                                                 <ul class="nav flex-column">
                                                     <li class="nav-item">
-                                                        <a class="nav-link" asp-controller="Reports" asp-action="MonthVisitors"><i class="fas fa-fw fa-table"></i>Por mes</a>
+                                                        <a class="nav-link" asp-controller="Reports" asp-action="AnualProfit"><i class="fas fa-fw fa-table"></i>Anual</a>
                                                     </li>
                                                     <li class="nav-item">
-                                                        <a class="nav-link" asp-controller="Reports" asp-action="TypeVisitors"><i class="fas fa-fw fa-table"></i>Por tipo</a>
+                                                        <a class="nav-link" asp-controller="Reports" asp-action="MonthProfit"><i class="fas fa-fw fa-table"></i>Mensual</a>
+                                                    </li>
+                                                    <li class="nav-item">
+                                                        <a class="nav-link" asp-controller="Reports" asp-action="AnualProfitVisitors"><i class="fas fa-fw fa-table"></i>Por Visitantes</a>
                                                     </li>
                                                 </ul>
                                             </div>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" asp-controller="Reports" asp-action="Earnings"><i class="fas fa-fw fa-hand-holding-usd"></i>Ganancias</a>
+                                            <a class="nav-link" data-toggle="collapse" aria-expanded="false" data-target="#submenu-3" aria-controls="submenu-3"><i class="fas fa-fw fa-users"></i>Visitantes</a>
+                                            <div id="submenu-3" class="collapse submenu" style="">
+                                                <ul class="nav flex-column">
+                                                    <li class="nav-item">
+                                                        <a class="nav-link" asp-controller="Reports" asp-action="AnualVisitors"><i class="fas fa-fw fa-table"></i>Anual</a>
+                                                    </li>
+                                                    <li class="nav-item">
+                                                        <a class="nav-link" asp-controller="Reports" asp-action="MonthVisitors"><i class="fas fa-fw fa-table"></i>Mensual</a>
+                                                    </li>
+                                                    <li class="nav-item">
+                                                        <a class="nav-link" asp-controller="Reports" asp-action="DailyVisitors"><i class="fas fa-fw fa-table"></i>Diaria</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" asp-controller="Reports" asp-action="WorkersActivities"><i class="fas fa-fw fa-table"></i>Trabajadores con mas Actividades</a>
@@ -242,7 +258,9 @@
     <script src="~/lib/assets/vendor/charts/c3charts/d3-5.4.0.min.js"></script>
     <script src="~/lib/assets/vendor/charts/c3charts/C3chartjs.js"></script>
     <script src="~/lib/assets/libs/js/dashboard-ecommerce.js"></script>
-
+    <script src="~/js/canvasjs.min.js"></script>
+    <script src="~/lib/assets/vendor/charts/charts-bundle/Chart.bundle.js"></script>
+    <script src="~/lib/assets/vendor/charts/charts-bundle/chartjs.js"></script>
     @RenderSection("Scripts", required: false)
 </body>
 </html>

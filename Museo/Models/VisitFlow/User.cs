@@ -10,15 +10,14 @@ namespace Museo.Models
     public class User : IdentityUser
     {
         public string FullName { get; set; }
-
+        public string First { get; set; }
+        public string Last { get; set; }
+        public int Age { get; set; }
         public string Photo { get; set; }
-
         public bool Active { get; set; }
         public int AreaId { get; set; }
-
         public int PositionId { get; set; }
         public Area Area { get; set; }
-
         public Position Position { get; set; }
     }
 }

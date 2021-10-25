@@ -14,6 +14,7 @@
     <div class="card-header d-flex">
         <h3 class="mb-0">Eventos</h3>
         <div class="dropdown ml-auto">
+            <a class="toolbar" role="button" asp-controller="Event" asp-action="Calendar"> <i class="fa fa-calendar"></i> Calendario</a>
             <a class="toolbar" role="button" asp-controller="Event" asp-action="Add"> <i class="fa fa-angle-double-right"></i> Insertar</a>
         </div>
     </div>
@@ -22,7 +23,7 @@
         @{
             foreach (var item in Model)
             {
-                <div class="col-xl-8 col-lg-12 col-md-12 col-sm-12 col-12 mb-5">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mb-5">
                     <div class="section-block">
                         <h3 class="section-title">@item.EventName</h3>
                     </div>

@@ -52,9 +52,9 @@
                                         <h5>Categoría: @item.Value </h5><p></p>
                                     </div>
                                 </div>
-                                <a href="~/documents/@item.Key.Manager" class="btn btn-primary">Ver</a>
-                                <a style="padding-left:20px;" class="btn btn-danger" asp-controller="Document" asp-action="Delete" asp-route-id="@item.Key.Id">Eliminar</a>
-                                <a style="padding-left:20px;" class="btn btn-secondary" asp-controller="Document" asp-action="Update" asp-route-id="@item.Key.Id">Cambiar</a>
+                                <a href="~/documents/@item.Key.Manager" class="btn btn-outline-primary">Ver</a>
+                                <a style="padding-left:20px;" class="btn btn-outline-danger" asp-controller="Document" asp-action="Delete" asp-route-id="@item.Key.Id">Eliminar</a>
+                                <a style="padding-left:20px;" class="btn btn-outline-brand" asp-controller="Document" asp-action="Update" asp-route-id="@item.Key.Id">Cambiar</a>
                             </div>
                         </div>
                     </div>

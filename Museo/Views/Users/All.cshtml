@@ -5,7 +5,7 @@
 @model IEnumerable<AllUsersViewModel>
 
 
-<div class="row" style="height:350px;">
+<div class="row" style="height:300px;">
 
     @foreach (var item in Model)
     {
@@ -16,17 +16,20 @@
             <div class="product-thumbnail">
                 <div class="product-img-head">
                     <div class="product-img">
-                        <img style="height:300px;" src="~/images/@s" alt="@item.UserName" class="img-fluid">
+                        <img style="height:250px;" src="~/images/@s" alt="@item.UserName" class="img-fluid">
                     </div>
                 </div>
                 <div class="product-content">
                     <div class="product-content-head">
-                        <h3 class="product-title">@item.UserName</h3>
-                        <div class="product-description">@item.FullName</div>
+                        <h1 class="product-title">Nombre de Usuario: @item.UserName</h1>
+                        <div class="product-description"><h3>Nombre Completo: @item.FullName @item.First @item.Last</h3></div>
                         <div class="product-details">
-                            <p>@item.Email</p>
-                            <p>@item.Area</p>
-                            <p>@item.Position</p>
+                            <h4>Edad: @item.Age</h4>
+                            <h4>Teléfono: @item.Phone</h4>
+                            <h4>Email: @item.Email</h4>
+                            <h4>Área: @item.Area</h4>
+                            <h4>Cargo: @item.Position</h4>
+                            <a class="btn btn-outline-primary" asp-action="ViewUser" asp-controller="Users" asp-route-id="@item.UserName"><i class="fa fa-search">Ver</i></a>
                         </div>
                     </div>
                 </div>

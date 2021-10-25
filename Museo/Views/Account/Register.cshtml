@@ -13,9 +13,29 @@
                 <span asp-validation-for="UserName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="FullName">Nombre y apellidos</label>
+                <label asp-for="FullName">Nombre</label>
                 <input asp-for="FullName" class="form-control" />
                 <span asp-validation-for="FullName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="First">Primer Apellido</label>
+                <input asp-for="First" class="form-control" />
+                <span asp-validation-for="First" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Last">Segundo Apellido</label>
+                <input asp-for="Last" class="form-control" />
+                <span asp-validation-for="Last" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Age">Edad</label>
+                <input asp-for="Age" class="form-control" />
+                <span asp-validation-for="Age" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Phone">Teléfono</label>
+                <input asp-for="Phone" class="form-control" />
+                <span asp-validation-for="Phone" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Password">Contraseña</label>
@@ -38,9 +58,9 @@
                     <input asp-for="Photo" class="form-control custom-file-input" />
                 </div>
             </div>
-            <div class="form-group"> 
+            <div class="form-group">
                 <h5 asp-for="AreaId">Área</h5>
-            <select class="selectpicker" id="my-select" asp-for="AreaId" asp-items="@Model.areas"></select>
+                <select class="selectpicker" id="my-select" asp-for="AreaId" asp-items="@Model.areas"></select>
             </div>
             <div class="form-group">
                 <h5 asp-for="PositionId">Cargo</h5>

@@ -15,14 +15,14 @@ namespace Museo.Models
         public string Title { get; set; }
 
         [Required]
-        [MaxLength(50, ErrorMessage = "A lo sumo 50 caracteres permitidos")]
         public string Description { get; set; }
 
         [Required]
-        [MaxLength(50, ErrorMessage = "A lo sumo 50 caracteres permitidos")]
+        [MaxLength(100, ErrorMessage = "A lo sumo 50 caracteres permitidos")]
         public string Author { get; set; }
 
         public string Link { get; set; }
+        public DateTime Date { get; set; }
 
     }
 }

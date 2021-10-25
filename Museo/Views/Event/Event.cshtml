@@ -1,0 +1,42 @@
+﻿
+
+@model EventViewModel
+    <h4>
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="card-title">@Model.EventName</h3>
+                    <p class="card-text">@Model.EventDescription</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Lugar: @Model.Place</li>
+                    <li class="list-group-item">Fecha : @Model.Date</li>
+                    <li class="list-group-item">Cantidad de Participantes : @Model.TotalParticipant</li>
+                    <li class="list-group-item">Tipo : @Model.EventType.Type<br /> Descripción: @Model.EventType.Description </li>
+                    <li class="list-group-item">Tema: @Model.EventThmatic.Thematic <br /> Descripción:@Model.EventThmatic.Description </li>
+                    <li class="list-group-item">
+                        Personalidades que asisten:<br />
+                        @foreach (var item in Model.Personalities)
+                        {
+                            <p>@item.Name</p><br />
+                        }
+                    </li>
+                    <li class="list-group-item">
+                        Organizadores:<br />
+                        @foreach (var item in Model.Organizers)
+                        {
+                            <p>@item.Name</p>
+                        }
+                    </li>
+                </ul>
+                <div class="card-footer p-0 text-center d-flex justify-content-center">
+                    <div class="card-footer-item card-footer-item-bordered">
+                        <a asp-action="All" asp-controller="Event" class="card-link">Ver Lista</a>
+                    </div>
+                    <div class="card-footer-item card-footer-item-bordered">
+                        <a asp-action="Calendar" asp-controller="Event" class="card-link">Ver Calendario</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </h4>

@@ -1,0 +1,68 @@
+﻿
+
+@{
+    ViewData["Title"] = "Ganancia Anual";
+}
+
+
+@section Breadcrumb{
+    <li class="breadcrumb-item"><a class="breadcrumb-link">Ganancias</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Ganancia Anual</li>
+}
+
+@model AnualProfitViewModel
+
+
+
+<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+    <div class="card">
+        <div class="card-header d-flex">
+            <h4 class="mb-0">Ganancias Anuales @Model.Year</h4>
+            <div class="dropdown ml-auto">
+                <div class="input-group mb-3">
+                    <form method="get">
+                        <input asp-for="Year" type="text" />
+                        <button type="submit" class="btn btn-primary" asp-action="AnualProfit" asp-controller="Reports"><i class="fas fa-search"></i></button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <div id="morris_bar"></div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <p class="display-7 font-weight-bold"><span class="text-primary d-inline-block">Total: $@Model.Total</span><span class="text-success float-right"></span></p>
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts{
+
+    <script>
+    var meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"]
+    var result = @Html.Raw(Model.AnualProfit);
+    var datapoints = [];
+    for (var i = 0; i < result.length; i++) {
+        datapoints.push({ label: meses[i], y: result[i].y });
+    }
+    var $arrColors = ['#5969ff','#ff0000','#ffdd00','#a809f4','#2eec9c','#dfb327','#5969ff','#ff0000','#ffdd00','#a809f4','#2eec9c','#dfb327']
+    new Morris.Bar({
+        element: 'morris_bar',
+        data: datapoints,
+        xkey: 'label',
+        ykeys: ['y'],
+        labels: ['Ganancia'],
+        barColors: function (row, series, type) {
+            return $arrColors[row.x];
+        },
+        resize: true,
+        gridTextSize: '14px',        
+        hideHover: true,
+        xLabelAngle: 35
+    });
+    </script>
+}

@@ -1,0 +1,204 @@
+﻿
+@{
+    ViewData["Title"] = "Ganancia Anual por Visitantes";
+}
+
+
+
+@section Breadcrumb{
+    <li class="breadcrumb-item"><a class="breadcrumb-link">Ganancias</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Ganancia Anual por tipo de Visitantes</li>
+}
+
+
+@model AnualProfitVisitorsViewModel
+
+
+<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+    <div class="card">
+        <div class="card-header d-flex">
+            <h2 class="mb-0">Ganancias Anuales por Visitantes @Model.Year.    Total: $@Model.Total</h2>
+            <div class="dropdown ml-auto">
+                <div class="input-group mb-3">
+                    <form method="get">
+                        <input asp-for="Year" type="text" />
+                        <button type="submit" class="btn btn-primary" asp-action="AnualProfitVisitors" asp-controller="Reports"><i class="fas fa-search"></i></button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="card">
+                <h5 class="card-header">Ganancias Totales</h5>
+                <div class="card-body">
+                    <div id="morris_stackedbar"></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+        <div class="card">
+            <h5 class="card-header">Adultos Extranjeros</h5>
+            <div class="card-body">
+                <div id="morris_bar_AdultExt"></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+        <div class="card">
+            <h5 class="card-header">Adultos Nacionales </h5>
+            <div class="card-body">
+                <div id="morris_bar_AdultNac"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+        <div class="card">
+            <h5 class="card-header">Niños Solos</h5>
+            <div class="card-body">
+                <div id="morris_bar_ChildAlone"></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+        <div class="card">
+            <h5 class="card-header">Niños Acompañados</h5>
+            <div class="card-body">
+                <div id="morris_bar_ChildCom"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+        <div class="card">
+            <h5 class="card-header">Niños Extranjeros</h5>
+            <div class="card-body">
+                <div id="morris_bar_ChildExt"></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+        <div class="card">
+            <h5 class="card-header">Residentes</h5>
+            <div class="card-body">
+                <div id="morris_bar_Residents"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+@section Scripts{
+
+    <script>
+    var meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"]
+    var result = @Html.Raw(Model.AdultExt);
+    var datapoints = [];
+    for (var i = 0; i < result.length; i++) {
+        datapoints.push({ label: meses[i], y: result[i].y });
+    }
+
+    var $arrColors = ['#5969ff','#ff0000','#ffdd00','#a809f4','#2eec9c','#dfb327','#5969ff','#ff0000','#ffdd00','#a809f4','#2eec9c','#dfb327']
+        var config = {
+            xkey: 'label',
+            ykeys: ['y'],
+            labels: ['Ganancia'],
+            barColors: function (row, series, type) {
+                return $arrColors[row.x];
+            },
+            resize: true,
+            gridTextSize: '10px',
+            hideHover: true
+        };
+
+        config.element = 'morris_bar_AdultExt';
+        config.data = datapoints;
+        new Morris.Bar(config);
+
+        var result = @Html.Raw(Model.AdultNac);
+        var datapoints = [];
+        for (var i = 0; i < result.length; i++) {
+            datapoints.push({ label: meses[i], y: result[i].y });
+        }
+
+        config.element = 'morris_bar_AdultNac';
+        config.data = datapoints;
+        new Morris.Bar(config);
+
+        var result = @Html.Raw(Model.ChildAlone);
+        var datapoints = [];
+        for (var i = 0; i < result.length; i++) {
+            datapoints.push({ label: meses[i], y: result[i].y });
+        }
+
+        config.element = 'morris_bar_ChildAlone';
+        config.data = datapoints;
+        new Morris.Bar(config);
+
+        var result = @Html.Raw(Model.ChildCom);
+        var datapoints = [];
+        for (var i = 0; i < result.length; i++) {
+            datapoints.push({ label: meses[i], y: result[i].y });
+        }
+
+        config.element = 'morris_bar_ChildCom';
+        config.data = datapoints;
+        new Morris.Bar(config);
+
+        var result = @Html.Raw(Model.ChildExt);
+        var datapoints = [];
+        for (var i = 0; i < result.length; i++) {
+            datapoints.push({ label: meses[i], y: result[i].y });
+        }
+
+        config.element = 'morris_bar_ChildExt';
+        config.data = datapoints;
+        new Morris.Bar(config);
+
+        var result = @Html.Raw(Model.Residents);
+        var datapoints = [];
+        for (var i = 0; i < result.length; i++) {
+            datapoints.push({ label: meses[i], y: result[i].y });
+        }
+
+        config.element = 'morris_bar_Residents';
+        config.data = datapoints;
+        new Morris.Bar(config);
+
+    </script>
+
+    <script>
+    var meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"]
+    var result = @Html.Raw(Model.Stacked);
+    var datapoints = [];
+    for (var i = 0; i < result.length; i++) {
+        datapoints.push({ label: meses[i], a: result[i].a, b: result[i].b, c: result[i].c, d: result[i].d, e: result[i].e, f: result[i].f });
+    }
+
+    var $arrColors = ['#5969ff','#ff0000','#ffdd00','#a809f4','#2eec9c','#dfb327','#5969ff','#ff0000','#ffdd00','#a809f4','#2eec9c','#dfb327']
+        var config = {
+            xkey: 'label',
+            ykeys: ['a','b','c','d','e','f'],
+            labels: ['Adultos Extranjeros', 'Adultos Nacionales', 'Niños Solos', 'Niños Acompañados', 'Niños Extranjeros', 'Residentes'],
+            resize: true,
+            gridTextSize: '10px',
+            hideHover: true,
+            stacked: true,
+        };
+
+        config.element = 'morris_stackedbar';
+    config.data = datapoints;
+    config.barColors = ['#191970','#0000cd','#4169e1','#6495ed','#00bfff','#b0e0e6']
+    new Morris.Bar(config);
+
+    </script>
+}

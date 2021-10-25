@@ -32,7 +32,7 @@ namespace Museo.Controllers
         {
             if (!ModelState.IsValid)
                 return View();
-            if (news.Link.StartsWith("http://"))
+            if (news.Link != null && news.Link.StartsWith("http://"))
             {
                 news.Link = news.Link.Remove(0, 7);
             }

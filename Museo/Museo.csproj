@@ -46,6 +46,8 @@
 
   <ItemGroup>
     <PackageReference Include="AjaxControlToolkit" Version="19.1.0" />
+    <PackageReference Include="Chart.js" Version="2.9.3" />
+    <PackageReference Include="ClosedXML" Version="0.94.2" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.0.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.0.1" />
@@ -54,13 +56,16 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.jQuery.Unobtrusive.Ajax" Version="3.2.6" />
+    <PackageReference Include="Newtonsoft.Json" Version="10.0.1" />
     <PackageReference Include="PagedList" Version="1.17.0" />
     <PackageReference Include="PagedList.Mvc" Version="4.5.0" />
+    <PackageReference Include="System-Web-Helpers.dll" Version="1.0.0" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="wwwroot\images\" />
     <Folder Include="wwwroot\img\" />
+    <Folder Include="wwwroot\documents\" />
   </ItemGroup>
 
 </Project>

@@ -1,0 +1,191 @@
+﻿
+
+@{
+    ViewData["Title"] = "Visitantes Diarios";
+}
+
+
+@section Breadcrumb{
+    <li class="breadcrumb-item"><a class="breadcrumb-link">Visitantes</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Diario</li>
+}
+
+@model DailyVisitorsViewModel
+
+@{
+    string[] months = { "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" };
+    var month = months[Model.Month - 1];
+}
+
+<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+    <div class="card">
+        <div class="card-header d-flex">
+            <h4 class="mb-0">Ganancias del mes de @month del @Model.Year</h4>
+            <div class="dropdown ml-auto">
+                <div class="input-group mb-3">
+                    <form method="get">
+                        <input asp-for="Month" type="number" />
+                        <input asp-for="Year" type="text" />
+                        <button type="submit" class="btn btn-primary" asp-action="MonthProfit" asp-controller="Reports"><i class="fas fa-search"></i></button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <div id="morris_bar"></div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <p class="display-7 font-weight-bold"><span class="text-primary d-inline-block">Total: @Model.Total</span><span class="text-success float-right"></span></p>
+        </div>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+        <div class="card">
+            <h5 class="card-header">Adultos Extranjeros</h5>
+            <div class="card-body">
+                <div id="morris_bar_AdultExt"></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+        <div class="card">
+            <h5 class="card-header">Adultos Nacionales </h5>
+            <div class="card-body">
+                <div id="morris_bar_AdultNac"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+        <div class="card">
+            <h5 class="card-header">Niños Solos</h5>
+            <div class="card-body">
+                <div id="morris_bar_ChildAlone"></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+        <div class="card">
+            <h5 class="card-header">Niños Acompañados</h5>
+            <div class="card-body">
+                <div id="morris_bar_ChildCom"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+        <div class="card">
+            <h5 class="card-header">Niños Extranjeros</h5>
+            <div class="card-body">
+                <div id="morris_bar_ChildExt"></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+        <div class="card">
+            <h5 class="card-header">Residentes</h5>
+            <div class="card-body">
+                <div id="morris_bar_Residents"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts{
+
+    <script>
+
+        var $arrColors = ['#5969ff', '#ff0000', '#ffdd00', '#a809f4', '#2eec9c', '#dfb327', '#5969ff', '#ff0000', '#ffdd00', '#a809f4', '#2eec9c', '#dfb327', '#5969ff',
+            '#ff0000', '#ffdd00', '#a809f4', '#2eec9c', '#dfb327', '#5969ff', '#ff0000', '#ffdd00', '#a809f4', '#2eec9c', '#dfb327', '#5969ff', '#ff0000', '#ffdd00',
+            '#a809f4', '#2eec9c', '#dfb327', '#5969ff', '#ff0000', '#ffdd00', '#a809f4', '#2eec9c', '#dfb327']
+        var config = {
+            xkey: 'x',
+            ykeys: ['y'],
+            labels: ['Total'],
+            barColors: function (row, series, type) {
+                return $arrColors[row.x];
+            },
+            resize: true,
+            gridTextSize: '14px',
+            hideHover: true
+        };
+
+        var result = @Html.Raw(Model.Days);
+        var datapoints = [];
+        for (var i = 0; i < result.length; i++) {
+            datapoints.push({ x: result[i].x, y: result[i].y });
+        }
+        config.element = 'morris_bar';
+        config.data = datapoints;
+        new Morris.Bar(config);
+
+        var result = @Html.Raw(Model.AdultExt);
+        var datapoints = [];
+        for (var i = 0; i < result.length; i++) {
+            datapoints.push({ x: result[i].x, y: result[i].y });
+        }
+
+        config.element = 'morris_bar_AdultExt';
+        config.data = datapoints;
+        new Morris.Bar(config);
+
+        var result = @Html.Raw(Model.AdultNac);
+        var datapoints = [];
+        for (var i = 0; i < result.length; i++) {
+            datapoints.push({ x: result[i].x, y: result[i].y });
+        }
+
+        config.element = 'morris_bar_AdultNac';
+        config.data = datapoints;
+        new Morris.Bar(config);
+
+        var result = @Html.Raw(Model.ChildAlone);
+        var datapoints = [];
+        for (var i = 0; i < result.length; i++) {
+            datapoints.push({ x: result[i].x, y: result[i].y });
+        }
+
+        config.element = 'morris_bar_ChildAlone';
+        config.data = datapoints;
+        new Morris.Bar(config);
+
+        var result = @Html.Raw(Model.ChildCom);
+        var datapoints = [];
+        for (var i = 0; i < result.length; i++) {
+            datapoints.push({ x: result[i].x, y: result[i].y });
+        }
+
+        config.element = 'morris_bar_ChildCom';
+        config.data = datapoints;
+        new Morris.Bar(config);
+
+        var result = @Html.Raw(Model.ChildExt);
+        var datapoints = [];
+        for (var i = 0; i < result.length; i++) {
+            datapoints.push({ x: result[i].x, y: result[i].y });
+        }
+
+        config.element = 'morris_bar_ChildExt';
+        config.data = datapoints;
+        new Morris.Bar(config);
+
+        var result = @Html.Raw(Model.Resident);
+        var datapoints = [];
+        for (var i = 0; i < result.length; i++) {
+            datapoints.push({ x: result[i].x, y: result[i].y });
+        }
+
+        config.element = 'morris_bar_Residents';
+        config.data = datapoints;
+        new Morris.Bar(config);
+    </script>
+}

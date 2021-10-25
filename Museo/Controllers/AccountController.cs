@@ -59,6 +59,10 @@ namespace Museo.Controllers
                 {
                     UserName = model.UserName,
                     FullName = model.FullName,
+                    First = model.First,
+                    Last = model.Last,
+                    Age = model.Age,
+                    PhoneNumber = model.Phone,
                     Email = model.Email,
                     Photo = uniqueFileName,
                     PositionId = model.PositionId,

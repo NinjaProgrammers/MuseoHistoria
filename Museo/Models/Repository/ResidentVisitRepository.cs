@@ -43,6 +43,14 @@ namespace Museo.Models
             return context.ResidentVisits.FirstOrDefault(x => x.Active && x.ResidentId == id.Item1 && x.VisitId == id.Item2);
         }
 
+        public IEnumerable<Resident> GetByVisitId(int id)
+        {
+            foreach(var item in context.ResidentVisits.Where(x => x.VisitId == id))
+            {
+                yield return context.Residents.FirstOrDefault(x => x.Id == item.ResidentId);
+            }
+        }
+
         public ResidentVisit Select(ResidentVisit entity)
         {
             throw new NotImplementedException();

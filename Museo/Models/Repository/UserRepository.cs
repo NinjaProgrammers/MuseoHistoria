@@ -64,16 +64,20 @@ namespace Museo.Models.Repository
                 item.AreaId = entity.AreaId;
                 item.Email = entity.Email;
                 item.FullName = entity.FullName;
+                item.PhoneNumber = entity.PhoneNumber;
                 item.Photo = entity.Photo;
                 item.Position = entity.Position;
                 item.PositionId = entity.PositionId;
                 item.UserName = entity.UserName;
+                item.First = entity.First;
+                item.Last = entity.Last;
+                item.Age = entity.Age;
             }
             context.SaveChanges();
             return item;
         }
 
-        public IEnumerable<User> MoreActivitiesWorker(int count = 10)
+        public IEnumerable<Tuple<int,string>> MoreActivitiesWorker(int count = 10)
         {
             var act = context.Activities.ToList();
             Dictionary<string, int> user_cant = new Dictionary<string, int>();
@@ -92,14 +96,9 @@ namespace Museo.Models.Repository
             {
                 a.Add(new Tuple<int, string>(item.Value, item.Key));
             }
-            a.Sort();
-            a.Reverse();
+            a.OrderByDescending(x => x.Item1);
 
-
-            for (int i = 0; i < count && i < a.Count; i++)
-            {
-                yield return context.Users.First(x => x.Id == a[i].Item2);
-            }
+            return a.Take(count);
 
         }
 

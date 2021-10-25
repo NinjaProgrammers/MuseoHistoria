@@ -1,6 +1,6 @@
 (function(window, document, $, undefined) {
         "use strict";
-        $(function() {
+    $(function () {
 
                 if ($('#chartjs_line').length) {
                     var ctx = document.getElementById('chartjs_line').getContext('2d');

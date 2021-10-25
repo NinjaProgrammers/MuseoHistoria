@@ -25,7 +25,7 @@ namespace Museo.Models
         public Activity Delete(object Id)
         {
             var activity = context.Activities.FirstOrDefault(x => x.Active && x.Id == (int)Id);
-            if(activity != null)
+            if (activity != null)
                 activity.Active = false;
             context.SaveChanges();
             return activity;
@@ -45,7 +45,7 @@ namespace Museo.Models
         {
             throw new NotImplementedException();
         }
-        
+
         public Activity Update(Activity entity)
         {
             var item = context.Activities.FirstOrDefault(x => x.Id == entity.Id);
@@ -63,27 +63,70 @@ namespace Museo.Models
                 item.TypeAct = entity.TypeAct;
                 item.TypeActId = entity.TypeActId;
                 item.User = entity.User;
-                item.UserId = entity.UserId;                
+                item.UserId = entity.UserId;
             }
             context.SaveChanges();
             return item;
         }
 
-        public int ActivityProfit(int month, int year = 2020)
+
+        public IEnumerable<(TypeAct, int)> ActivitiesByUserAndDay(int year, int month,
+                            int day, string user)
+        {
+            foreach (var type in context.TypeActs)
+            {
+                yield return (type, context.Activities.Count(x =>
+                    x.TypeActId == type.Id &&
+                    x.UserId == user &&
+                    x.Date.Year == year &&
+                    x.Date.Month == month &&
+                    x.Date.Day == day
+                ));
+            }
+        }
+
+        public IEnumerable<(int, int)> ActivitiesByUserAndMonth(int year, int month, string user)
+        {
+            for (int i = 1; i <= DateTime.DaysInMonth(year, month); i++)
+            {
+                yield return (i, context.Activities.Count(x =>
+                    x.UserId == user &&
+                    x.Date.Year == year &&
+                    x.Date.Month == month &&
+                    x.Date.Day == i
+                ));
+            }
+        }
+        public IEnumerable<(int, int)> ActivitiesByUserAndYear(int year, string user)
+        {
+            for (int i = 1; i <= 12; i++)
+            {
+                yield return (i, context.Activities.Count(x =>
+                    x.UserId == user &&
+                    x.Date.Year == year &&
+                    x.Date.Month == i
+                ));
+            }
+        }
+
+        public (int,int) ActivityProfit(int month, int day = 0, int year = 2020)
         {
             var activities = context.Activities.ToList();
             var typeAct = context.TypeActs.ToList();
             int profit = 0;
+            int count = 0;
             foreach (var item in activities)
             {
-                if ((item.Date.Month == month || month == 0) && item.Date.Year == year)
+                if ((item.Date.Month == month &&(item.Date.Day == day || day == 0 ) || month == 0) && item.Date.Year == year)
                 {
-
                     int cover = typeAct.First(x => x.Id == item.TypeActId).CoverPrice;
-                    profit += (item.AdultExt + item.AdultNac + item.ChildExt + item.ChildNac) * cover;
+                    count += (item.AdultExt + item.AdultNac + item.ChildExt + item.ChildNac);
+                    profit += count * cover;
                 }
             }
-            return profit;
+            return (count,profit);
         }
+
+
     }
 }

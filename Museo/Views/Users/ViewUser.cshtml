@@ -1,0 +1,43 @@
+﻿
+@model User
+
+@section Breadcrumb{
+    <li class="breadcrumb-item" aria-current="page"><a asp-action="All" asp-controller="User">Usuarios</a></li>
+    <li class="breadcrumb-item active">@Model.UserName </li>
+}
+
+@{
+    var img = @Model.UserName + ".jpg";
+}
+
+<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+    <div class="card">
+        <div class="card-header">
+            <h2 class="card-header-title">Información de Usuario</h2>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12">
+                    <img class="card-img-top img-fluid" src="~/images/@img" alt="@Model.UserName">
+                </div>
+                <div class="col-xl-8 col-lg-6 col-md-6 col-sm-12 col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h2 class="card-title">@Model.FullName @Model.First @Model.Last</h2>
+                            <h4 class="card-text">
+                                Nombre de Usuario: @Model.UserName <br />
+                                Edad: @Model.Age <br />
+                                Email : @Model.Email <br />
+                                Teléfono : @Model.PhoneNumber <br />
+                                Área : @Model.Area.Name <br />
+                                Siglas del Área: @Model.Area.Acronym <br />
+                                Cargo : @Model.Position.Name <br />
+                                Descripción del Cargo: @Model.Position.Description                               
+                            </h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

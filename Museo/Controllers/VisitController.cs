@@ -12,15 +12,45 @@ namespace Museo.Controllers
     public class VisitController : Controller
     {
         public readonly IVisitRepository repository;
-        public VisitController(IVisitRepository repository)
+        private readonly IUserRepository userRepository;
+        private readonly IResidentVisitRepository residentVisitRepository;
+
+        public VisitController(IVisitRepository repository, IUserRepository userRepository, IResidentVisitRepository residentVisitRepository)
         {
             this.repository = repository;
+            this.userRepository = userRepository;
+            this.residentVisitRepository = residentVisitRepository;
         }
 
         public ViewResult All()
         {
-            var list = repository.GetAll();
-            return View(list.ToList());
+            var list = repository.GetAll().OrderByDescending(x => x.Date);
+            List<AllVisitViewModel> viewModel = new List<AllVisitViewModel>();
+            foreach (var item in list)
+            {
+                AllVisitViewModel x = new AllVisitViewModel()
+                {
+                    Active = item.Active,
+                    AdultExt = item.AdultExt,
+                    AdultNac = item.AdultNac,
+                    ChildAlone = item.ChildAlone,
+                    ChildExt = item.ChildExt,
+                    ChildsCom = item.ChildsCom,
+                    Date = item.Date,
+                    User = userRepository.GetById(item.UserId)
+                };
+                foreach (var r in residentVisitRepository.GetByVisitId(item.Id))
+                {
+                    x.Resident++;
+                }
+                x.TotalVisitors = x.AdultExt + x.AdultNac + x.ChildAlone + x.ChildExt + x.ChildsCom + x.Resident;
+                var prices = repository.Prices();
+                x.Earning = x.AdultExt * prices.Item1 + x.AdultNac * prices.Item2 + x.ChildAlone * prices.Item3 + x.ChildExt * prices.Item4 + x.ChildsCom * prices.Item5
+                    + x.Resident * prices.Item6;
+                viewModel.Add(x);
+            }
+
+            return View(viewModel);
         }
 
         public ViewResult Add()
@@ -43,7 +73,7 @@ namespace Museo.Controllers
                 ChildExt = item.ChildExt,
                 ChildsCom = item.ChildsCom,
                 Date = item.Date,
-                UserId = item.UserId
+                UserId = userRepository.GetByUsername(User.Identity.Name).Id          
             };
 
             repository.AddEntity(visit);

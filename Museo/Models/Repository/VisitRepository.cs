@@ -3,11 +3,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
+using System.Text.Json;
 namespace Museo.Models.Repository
 {
     public class VisitRepository : IVisitRepository
     {
+
         public int AdultNacPrice { get { return adultNacPrice; } }
         int adultNacPrice;
         public int AdultExtPrice { get { return adultExtPrice; } }
@@ -27,8 +28,9 @@ namespace Museo.Models.Repository
 
         public VisitRepository(ApplicationDBContext con)
         {
-            SetPrices();
             context = con;
+            SetPrices();
+
         }
         public Visit AddEntity(Visit entity)
         {
@@ -49,7 +51,7 @@ namespace Museo.Models.Repository
 
         public IEnumerable<Visit> GetAll()
         {
-            return context.Visits.Where(x => x.Active);
+            return context.Visits;
         }
 
         public Visit GetById(object Id)
@@ -60,6 +62,11 @@ namespace Museo.Models.Repository
         public Visit Select(Visit entity)
         {
             throw new NotImplementedException();
+        }
+
+        public Tuple<int,int,int,int,int,int> Prices()
+        {
+            return new Tuple<int, int, int, int, int, int>(AdultExtPrice, AdultNacPrice, ChildAlonePrice, ChildCompPrice, ChildExtPrice, ResidentPrice);
         }
 
         public Visit Update(Visit entity)
@@ -82,9 +89,10 @@ namespace Museo.Models.Repository
         }
 
         //si se le pasa cero es para coger todos los meses del anno
-        public Tuple<int, int, int, int, int, int, int> VisitFlow_Month(int m, int year = 2020)
+        public VisitAux VisitFlow_Month(int m, int year = 2020)
         {
             var visits = context.Visits.ToList();
+            int total = 0;
             int adultExt_Month = 0;
             int adultNac_Month = 0;
             int childAlone_Month = 0;
@@ -112,13 +120,62 @@ namespace Museo.Models.Repository
                 if (match_visit.Contains(item.VisitId))
                     resident_Month += 1;
             }
-            int total = adultExt_Month + adultNac_Month + childAlone_Month + childCom_Month + childExt_Mont + resident_Month;
+            total = adultExt_Month + adultNac_Month + childAlone_Month + childCom_Month + childExt_Mont + resident_Month;
+            var a = new VisitAux();
+            a.adultExt = adultExt_Month;
+            a.adultNac = adultNac_Month;
+            a.childAlone = childAlone_Month;
+            a.childCom = childCom_Month;
+            a.childExt = childExt_Mont;
+            a.resident = resident_Month;
 
-            return new Tuple<int, int, int, int, int, int, int>(total, adultExt_Month, adultNac_Month, childAlone_Month, childCom_Month, childExt_Mont, resident_Month);
+            return a;
         }
 
+        public VisitAux[] DailyVisit(int m, int year = 2020)
+        {
+            VisitAux[] days = new VisitAux[32];
+            for (int i = 0; i < days.Length; i++)
+            {
+                days[i] = new VisitAux();
+            }
+            var visits = context.Visits.ToList();
+            foreach (var item in visits)
+            {
+                if (item.Date.Month == m && item.Date.Year == year)
+                {
+                    days[item.Date.Day].adultExt += item.AdultExt;
+                    days[item.Date.Day].adultNac += item.AdultNac;
+                    days[item.Date.Day].childAlone += item.ChildAlone;
+                    days[item.Date.Day].childCom += item.ChildsCom;
+                    days[item.Date.Day].childExt += item.ChildExt;
+                }
+            }
+            var r_visits = context.ResidentVisits.ToList();
+            var query = (from r in context.ResidentVisits
+                         join v in context.Visits on r.VisitId equals v.Id
+                         select v.Date).ToList();
 
-        public void SetPrices(int adulNac = 10, int adultExt = 75, int childAlone = 5, int childCom = 3, int childExt = 50, int resident = 30)
+            foreach (var item in query)
+            {
+                if (item.Month == m && item.Year == year)
+                    days[item.Day].resident += 1;
+            }
+            return days;
+        }
+        public (int[], VisitAux[]) DailyProfit(int m, int year = 2020)
+        {
+            var visits = DailyVisit(m, year);
+            int[] result = new int[32];
+            for (int i = 0; i < visits.Length; i++)
+            {
+                result[i] = visits[i].adultExt + visits[i].adultNac  + visits[i].childAlone + visits[i].childCom  + visits[i].childExt  + visits[i].resident ;
+            }
+            return (result,visits);
+        }
+        
+
+        public void SetPrices(int adulNac = 5, int adultExt = 7, int childAlone = 1, int childCom = 3, int childExt = 5, int resident = 5)
         {
             adultNacPrice = adulNac;
             adultExtPrice = adultExt;
@@ -128,17 +185,32 @@ namespace Museo.Models.Repository
             residentPrice = resident;
         }
 
-        public Tuple<int,Tuple<int,int,int,int,int,int,int>> MonthProfit(int month)
+        public Tuple<float, VisitAux> MonthProfit(int month,int year)
         {
-            var a = VisitFlow_Month(month);
-            var value = a.Item2 * AdultExtPrice + a.Item3 * adultNacPrice + a.Item4 * ChildAlonePrice + a.Item5 * ChildCompPrice + a.Item6 * ChildExtPrice + a.Item7 * residentPrice ;
-            return new Tuple<int, Tuple<int, int, int, int, int, int,int>>(value, a);
+            var a = VisitFlow_Month(month, year);
+            var value = a.adultExt * AdultExtPrice + a.adultNac * adultNacPrice + a.childAlone * ChildAlonePrice + a.childCom * ChildCompPrice + a.childExt * ChildExtPrice + a.resident * residentPrice;
+            return new Tuple<float, VisitAux>(value, a);
         }
 
-        public int AnualProfit(int year)
+        public Tuple<float, VisitAux> AnualProfit(int year)
         {
             var a = VisitFlow_Month(0, year);
-            return a.Item2 * AdultExtPrice + a.Item3 * adultNacPrice + a.Item4 * ChildAlonePrice + a.Item5 * ChildCompPrice + a.Item6 * ChildExtPrice + a.Item7 * residentPrice;
+            var value =  a.adultExt * AdultExtPrice + a.adultNac * adultNacPrice + a.childAlone * ChildAlonePrice + a.childCom * ChildCompPrice + a.childExt * ChildExtPrice + a.resident * residentPrice;
+            return new Tuple<float, VisitAux>(value, a);
         }
+
+
+
+    }
+    public class VisitAux
+    {
+
+        public int adultExt { get; set; }
+        public int adultNac { get; set; }
+        public int childAlone { get; set; }
+        public int childCom { get; set; }
+        public int childExt { get; set; }
+        public int resident { get; set; }
+        public int total { get { return adultNac + adultExt + childAlone + childCom + childExt + resident; } }
     }
 }

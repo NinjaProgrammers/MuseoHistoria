@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Claudia's PC\\Documents\\GitHub\\MuseoHistoria\\Museo\\Museo.csproj": {}
+    "E:\\3er Año\\SBD\\MuseoHistoria\\MuseoHistoria\\Museo\\Museo.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Claudia's PC\\Documents\\GitHub\\MuseoHistoria\\Museo\\Museo.csproj": {
+    "E:\\3er Año\\SBD\\MuseoHistoria\\MuseoHistoria\\Museo\\Museo.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Claudia's PC\\Documents\\GitHub\\MuseoHistoria\\Museo\\Museo.csproj",
+        "projectUniqueName": "E:\\3er Año\\SBD\\MuseoHistoria\\MuseoHistoria\\Museo\\Museo.csproj",
         "projectName": "Museo",
-        "projectPath": "C:\\Users\\Claudia's PC\\Documents\\GitHub\\MuseoHistoria\\Museo\\Museo.csproj",
+        "projectPath": "E:\\3er Año\\SBD\\MuseoHistoria\\MuseoHistoria\\Museo\\Museo.csproj",
         "packagesPath": "C:\\Users\\Claudia's PC\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Claudia's PC\\Documents\\GitHub\\MuseoHistoria\\Museo\\obj\\",
+        "outputPath": "E:\\3er Año\\SBD\\MuseoHistoria\\MuseoHistoria\\Museo\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Claudia's PC\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -23,8 +23,6 @@
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "C:\\Users\\Claudia's PC\\.nuget\\packages": {},
-          "C:\\Users\\Claudia's PC\\Downloads\\Bootstrap Templates\\AdminLTE-3.0.2\\AdminLTE-3.0.2": {},
-          "C:\\packages": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -44,6 +42,14 @@
             "AjaxControlToolkit": {
               "target": "Package",
               "version": "[19.1.0, )"
+            },
+            "Chart.js": {
+              "target": "Package",
+              "version": "[2.9.3, )"
+            },
+            "ClosedXML": {
+              "target": "Package",
+              "version": "[0.94.2, )"
             },
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
@@ -67,6 +73,10 @@
               "target": "Package",
               "version": "[3.2.6, )"
             },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[10.0.1, )"
+            },
             "PagedList": {
               "target": "Package",
               "version": "[1.17.0, )"
@@ -74,6 +84,10 @@
             "PagedList.Mvc": {
               "target": "Package",
               "version": "[4.5.0, )"
+            },
+            "System-Web-Helpers.dll": {
+              "target": "Package",
+              "version": "[1.0.0, )"
             }
           },
           "imports": [
@@ -86,6 +100,16 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[3.0.1, 3.0.1]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Host.win-x64",
+              "version": "[3.0.3, 3.0.3]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
@@ -94,7 +118,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.300\\RuntimeIdentifierGraph.json"
         }
       }
     }

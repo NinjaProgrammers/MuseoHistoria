@@ -40,6 +40,22 @@ namespace Museo.ViewModels
         [MaxLength(60, ErrorMessage = "Caracteres máximos excedidos")]
         public string FullName { get; set; }
 
+        [Required(ErrorMessage = "Introduzca su primer apellido")]
+        [MaxLength(60, ErrorMessage = "Caracteres máximos excedidos")]
+        public string First { get; set; }
+
+        [Required(ErrorMessage = "Introduzca su segundo apellido")]
+        [MaxLength(60, ErrorMessage = "Caracteres máximos excedidos")]
+        public string Last { get; set; }
+
+        [Required(ErrorMessage = "Introduzca su edad")]
+        [MaxLength(8, ErrorMessage = "Caracteres máximos excedidos")]
+        public string Phone { get; set; }
+
+        [Required(ErrorMessage = "Introduzca su teléfono")]
+        [Range(18, 80, ErrorMessage = "Edad no válida")]
+        public int Age { get; set; }
+
         [Required(ErrorMessage = "Introduzca su contraseña")] 
         [DataType(DataType.Password)]
         public string Password { get; set; }

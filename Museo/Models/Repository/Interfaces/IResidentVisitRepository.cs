@@ -7,5 +7,6 @@ namespace Museo.Models.Repository.Interfaces
 {
     public interface IResidentVisitRepository:IRepository<ResidentVisit>
     {
+        public IEnumerable<Resident> GetByVisitId(int id);
     }
 }

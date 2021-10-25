@@ -1,0 +1,74 @@
+﻿
+
+
+@{
+    ViewData["Title"] = "Visitantes Anuales";
+}
+
+
+
+@section Breadcrumb{
+    <li class="breadcrumb-item"><a class="breadcrumb-link">Visitantes</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Flujo Anual</li>
+}
+
+
+
+@model AnualVisitorsViewModel
+
+<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+    <div class="card">
+        <div class="card-header d-flex">
+            <h2 class="mb-0">Total de Visitantes del @Model.Year:  @Model.Total</h2>
+            <div class="dropdown ml-auto">
+                <div class="input-group mb-3">
+                    <form method="get">
+                        <input asp-for="Year" type="text" />
+                        <button type="submit" class="btn btn-primary" asp-action="AnualVisitors" asp-controller="Reports"><i class="fas fa-search"></i></button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="card">
+                <h5 class="card-header">Porciento de Visitantes</h5>
+                <div class="card-body">
+                    <div id="morris_donut"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts{
+
+    <script>
+    var datapoints = [];
+    datapoints.push({ value: @Model.AdultExtPer , label: 'Adultos Extranjeros' });
+    datapoints.push({ value: @Model.AdultNacPer , label: 'Adultos Nacionales' });
+    datapoints.push({ value: @Model.ChildAloPer , label: 'Niños Solos' });
+    datapoints.push({ value: @Model.ChildComPer , label: 'Niños Acompañados' });
+    datapoints.push({ value: @Model.ChildExtPer , label: 'Niños Extranjeros' });
+    datapoints.push({ value: @Model.ResidentPer , label: 'Residentes' });
+
+    new Morris.Donut({
+        element: 'morris_donut',
+        data: datapoints ,
+        labelColor: '#2e2f39',
+            gridTextSize: '14px',
+        colors: [
+            "#5969ff",
+            "#ff407b",
+            "#25d5f2",
+            "#ffc750",
+            "#c600ab",
+            "#3bb671"
+
+        ],
+        formatter: function(x) { return x + "%" },
+            resize: true
+        });
+    </script>
+
+}

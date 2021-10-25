@@ -63,11 +63,12 @@ namespace Museo.Controllers
             {
                 Name = document.Name,
                 Author = document.Author,
-                Date = document.Date,
+                Date = DateTime.Now,
                 Description = document.Description,
                 DocumentCategoryId = document.DocumentCategoryId,
                 PublicationDate = document.PublicationDate,
-                Manager = uniquefilename
+                Manager = uniquefilename,
+                
             };
             repository.AddEntity(d);
             return RedirectToAction("All");
@@ -89,12 +90,38 @@ namespace Museo.Controllers
             viewModel.Description = document.Description;
             viewModel.DocumentCategoryId = document.DocumentCategoryId;
             viewModel.PublicationDate = document.PublicationDate;
+            viewModel.Id = document.Id;
             return View(viewModel);
         }
         [HttpPost]
-        public IActionResult Update(Document document)
+        public async Task<IActionResult> Update(AddDocumentViewModel document)
         {
-            repository.Update(document);
+            if (!ModelState.IsValid)
+            {
+                AddDocumentViewModel viewModel = new AddDocumentViewModel(repository.AllCategories());
+                return View(viewModel);
+            }
+
+            string uniquefilename = null;
+
+            var c = document.Manager.ContentType;
+
+            if (document.Manager != null)
+            {
+                string folder = Path.Combine(hostingEnvironment.WebRootPath, "documents");
+                uniquefilename = Guid.NewGuid().ToString() + "_" + document.Manager.FileName;
+                string path = Path.Combine(folder, uniquefilename);
+                await document.Manager.CopyToAsync(new FileStream(path, FileMode.Create));
+            }
+            Document d = repository.GetById(document.Id);            
+            d.Name = document.Name;
+            d.Author = document.Author;
+            d.Date = document.Date;
+            d.Description = document.Description;
+            d.DocumentCategoryId = document.DocumentCategoryId;
+            d.PublicationDate = document.PublicationDate;
+            d.Manager = uniquefilename;
+            repository.Update(d);
             return RedirectToAction("All");
         }
     }

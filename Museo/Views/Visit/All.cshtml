@@ -3,7 +3,7 @@
     <li class="breadcrumb-item active">Visitas</li>
 }
 
-@model IEnumerable<Visit>
+@model List<AllVisitViewModel>
 
 <div class="card">
     <div class="card-header d-flex">
@@ -11,5 +11,42 @@
         <div class="dropdown ml-auto">
             <a class="toolbar" role="button" asp-controller="Visit" asp-action="Add"> <i class="fa fa-angle-double-right"></i> Insertar</a>
         </div>
+    </div>
+    <div class="card-body">
+        <table class="table table-striped">
+            <thead>
+               <tr>
+                   <td>#</td>
+                   <td>Usuario</td>
+                   <td>Fecha</td>
+                   <td>Adultos Extranjeros</td>
+                   <td>Adultos Nacionales</td>
+                   <td>Niños Solos</td>
+                   <td>Niños Acompañados</td>
+                   <td>Niños Extranjeros</td>
+                   <td>Residentes</td>
+                   <td>Total Visitantes</td>
+                   <td>Ganancias</td>
+               </tr>
+            </thead>
+            <tbody>
+               @for (int i = 1; i <= Model.Count; i++)
+               {
+                   <tr>
+                       <td>@i</td>
+                       <td>@Model[i-1].User.UserName</td>
+                       <td>@Model[i-1].Date</td>
+                       <td>@Model[i-1].AdultExt</td>
+                       <td>@Model[i-1].AdultNac</td>
+                       <td>@Model[i-1].ChildAlone</td>
+                       <td>@Model[i-1].ChildsCom</td>
+                       <td>@Model[i-1].ChildExt</td>
+                       <td>@Model[i-1].Resident</td>
+                       <td>@Model[i-1].TotalVisitors</td>
+                       <td>@Model[i-1].Earning</td>
+                   </tr>
+               }
+            </tbody>
+        </table>
     </div>
 </div>

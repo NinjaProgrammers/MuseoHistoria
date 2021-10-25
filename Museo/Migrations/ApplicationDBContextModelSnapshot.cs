@@ -619,13 +619,15 @@ namespace Museo.Migrations
 
                     b.Property<string>("Author")
                         .IsRequired()
-                        .HasColumnType("nvarchar(50)")
-                        .HasMaxLength(50);
+                        .HasColumnType("nvarchar(100)")
+                        .HasMaxLength(100);
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasColumnType("nvarchar(50)")
-                        .HasMaxLength(50);
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Link")
                         .HasColumnType("nvarchar(max)");
@@ -728,6 +730,9 @@ namespace Museo.Migrations
                     b.Property<float>("Cost")
                         .HasColumnType("real");
 
+                    b.Property<int>("CoverPrice")
+                        .HasColumnType("int");
+
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
@@ -784,10 +789,19 @@ namespace Museo.Migrations
                     b.Property<bool>("Active")
                         .HasColumnType("bit");
 
+                    b.Property<int>("Age")
+                        .HasColumnType("int");
+
                     b.Property<int>("AreaId")
                         .HasColumnType("int");
 
+                    b.Property<string>("First")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("FullName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Last")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Photo")

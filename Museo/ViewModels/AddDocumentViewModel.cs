@@ -23,6 +23,7 @@ namespace Museo.ViewModels
             DateTime dateTime = new DateTime();
             Date = dateTime.Date;
         }
+        public int Id { get; set; }
         public DateTime Date { get; set; }
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "Se requiere un nombre")]

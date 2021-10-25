@@ -35,7 +35,11 @@ namespace Museo.Controllers
                     UserName = item.UserName,
                     FullName = item.FullName,
                     Email = item.Email,
-                    Active = item.Active
+                    Active = item.Active,
+                    Age = item.Age,
+                    First = item.First,
+                    Last = item.Last,
+                    Phone = item.PhoneNumber
                 };
                 viewModels.Add(model);
             }
@@ -49,7 +53,13 @@ namespace Museo.Controllers
             return PartialView("_UsersListPartial", repository.GetAll().OrderByDescending(x => x.UserName));
         }
 
-
+        public IActionResult ViewUser(string id)
+        {
+            User user = repository.GetByUsername(id);
+            user.Area = areaRepository.GetById(user.AreaId);
+            user.Position = positionRepository.GetById(user.PositionId);
+            return View(user);
+        }
 
 
         //public ViewResult Add()
